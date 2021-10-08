@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap'); /* Lato font */
+
+/* we do a little resetting */
+body, header, main, footer, div, figcaption, article, h1 {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+/* variables */
+:root {
+    --base-font-size: medium;
+    --color-1: #030310;
+    --color-3: #090916;
+    --color-2: #efefef;
+}
+
+@media (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
+    :root {
+        --base-font-size: x-large;
+    }
+}
+
+/* some basic stuff */
+body {
+    color: var(--color-2);
+    background-color: var(--color-1);
+
+    min-width: 500px;
+}
+
+html {
+    font-size: var(--base-font-size);
+}
+
+.reverse-style {
+    background-color: var(--color-2);
+    color: var(--color-1);
+}
+
+span.non-break {
+    display: inline-block;
+}
+
+/* header and image */
+header h1 {
+    padding: 20px 50px;
+    font-size: 3em;
+    text-align: center;
+    align-content: center;
+    width: 100%;
+
+    margin-top: 10px;
+}
+
+#img-div {
+    max-width: 1200px;
+    margin: auto;
+
+}
+
+#img-div * {
+    margin: 0;
+}
+
+#image {
+    display: block;
+    max-width: 100%;
+    justify-self: center;
+}
+
+#img-div figcaption {
+    display: block;
+    text-align: center;
+    padding: 10px;
+}
+
+/* main content / timeline */
+main {
+    background-color: var(--color-3);
+
+    text-align: center;
+    max-width: 1200px;
+    margin: auto;
+
+    font-size: 1.3em;
+    padding: 20px;
+}
+
+#tribute-info {
+    margin: auto;
+}
+
+ul {
+    display: inline-block;
+    list-style-type: disc;
+}
+
+li * {
+    display: inline;
+}
+li {
+    display: block;
+    margin: 15px 0px;
+    border-left: 1px solid var(--color-2);
+    padding-left: 0.5em;
+
+    max-width: 700px;
+    text-align: left;
+}
+
+/* footer */
+footer {
+    text-align: center;
+    padding: 10px;
+
+}
+
+a {
+    color: inherit;
+}
+/* mobile */
