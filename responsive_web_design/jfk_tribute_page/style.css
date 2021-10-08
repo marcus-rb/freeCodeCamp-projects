@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap'); /* Lato font */
+
+:root {
+    --color-1: #030310;
+    --color-2: #efefef;
+}
+
+body, header, main, footer, div, figcaption, article {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    min-width: min-content;
+    max-width: 100%;
+
+    font-family: Lato, Arial, Helvetica, sans-serif;
+
+    background-color: var(--color-1);
+    color: var(--color-2);
+}
+
+/* header and related */
+
+header {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    min-width: inherit;
+
+    min-height: 100vh;
+
+    color: var(--color-1);
+}
+
+#image {
+    object-fit: cover;
+    height: 100vh;
+    width: calc(100%);
+    max-width: 100%; /* necessary to pass fcc test suite */
+    display: block;
+}
+
+/* caption / page title */
+header figcaption {
+    min-width: max-content;
+
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+
+    padding: 0px 50px 0px 50px;
+    
+    background-color: var(--color-2);
+    border-right: 3px solid black;
+}
+
+@media (max-width: 830px), (min-resolution: 2dppx),  (-webkit-min-device-pixel-ratio: 2) {
+
+    header figcaption {
+        top: 0;
+        left: 0;
+        bottom: 100%;
+
+        width: 100%;
+        height: min-content;
+
+        margin: 0px;
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+        border: 0;
+    }
+
+    header {
+        min-height: 550px;
+    }
+    #image {
+        min-height: 550px;
+
+    }
+}
+
+
+
+
+/* ----- caption / page title end ----- */
+
+
+/* main and related */
+
+main {
+    margin: auto;
+    border: 1px solid black;
+
+    width: 100%;
+}
+
+main p {
+    padding: 0px 10px 0px 10px;
+    font-size: 20px;
+    text-align: justify;
+}
+
+@media (min-width: 1200px) {
+    main {
+        width: 1200px;
+    }
+}
+
+.timeline-card {
+    width: 100%;
+    
+    padding: 10px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: "header header" "text image" "text image";
+}
+
+.reversed-timeline-card {
+    grid-template-areas: "header header" "image text" "image text";
+}
+
+.timeline-card > p {
+    grid-area: text;
+    font-size: 18px;
+    text-align: center;
+    align-self: center;
+}
+
+.timeline-card > h2 {
+    grid-area: header;
+    overflow-wrap: break-word;
+    text-align: center;
+}
+
+.timeline-img {
+    grid-area: image;
+    width: 100%;
+    object-fit: cover;
+    align-self: center;
+}
+
+@media (max-width: 900px), (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
+    .timeline-card {
+        grid-template-areas: "header header" "image image" "text text";
+    }
+}
+
+span.avoidwrap { display: inline-block;}
+
+/* footer and related */
+footer {
+    background-color: var(--color-2);
+    color: var(--color-1);
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+}
+
+/* phone stuff for font sizes */
+
+@media (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
+    h1 {
+        font-size: 80px;
+    }
+    h2 {
+        font-size: 62px;
+    }
+    header p {
+        font-size: 40px;
+    }
+    main p, .timeline-card p {
+        font-size: 38px;
+    }
+    footer {
+        font-size: 38px;
+    }
+}
