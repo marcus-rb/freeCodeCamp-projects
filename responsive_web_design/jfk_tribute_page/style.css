@@ -34,7 +34,7 @@ header {
     color: var(--color-1);
 }
 
-#image {
+#image-2 {
     object-fit: cover;
     height: 100vh;
     width: calc(100%);
@@ -149,6 +149,11 @@ main p {
     .timeline-card {
         grid-template-areas: "header header" "image image" "text text";
     }
+}
+
+#image {
+    max-width: 100%;
+    margin: auto;
 }
 
 span.avoidwrap { display: inline-block;}
