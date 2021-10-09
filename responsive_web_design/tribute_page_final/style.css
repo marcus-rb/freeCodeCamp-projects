@@ -15,12 +15,6 @@ body, header, main, footer, div, figcaption, article, h1 {
     --color-2: #efefef;
 }
 
-@media (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
-    :root {
-        --base-font-size: x-large;
-    }
-}
-
 /* some basic stuff */
 body {
     color: var(--color-2);
@@ -119,4 +113,13 @@ footer {
 a {
     color: inherit;
 }
-/* mobile */
+
+/* mobile stuff */
+@media (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
+    :root {
+        --base-font-size: x-large;
+    }
+    li {
+        max-width: 100%;
+    }
+}
