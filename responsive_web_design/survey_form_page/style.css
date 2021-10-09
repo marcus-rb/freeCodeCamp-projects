@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
+
+:root {
+    --base-font-size: large;
+}
+
+/* body / general */
+
+html {
+    font-family: "Inter", sans-serif;
+    font-size: var(--base-font-size);
+}
+
+body {
+    min-width: 500px;
+    margin: 0px;
+    padding: 0px;
+    margin-bottom: 100px;
+}
+
+/* header stuff */
+header {
+    text-align: center;
+}
+
+header p {
+    font-size: smaller;
+    padding: auto 50px;
+}
+
+/* main stuff */
+main {
+    max-width: 800px;
+    margin: 30px auto 30px auto;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+div.form-dataset {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+div.form-dataset > label {
+    margin: 5px;
+}
+
+div.form-dataset > input, div.form-dataset > select {
+    margin: 5px;
+    margin-top: 0px;
+    padding: 10px;
+    font-size: var(--base-font-size);
+}
+
+div.form-dataset > span {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+#technologies-inner {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#technologies-inner > span {
+    background-color: lightgray;
+    margin: 5px;
+    padding: 5px;
+}
+
+textarea {
+    min-height: 120px;
+    font-size: large;
+    font-family: inherit;
+    padding: 5px;
+    resize: vertical;
+    font-size: var(--base-font-size);
+}
+
+/* footer */
+footer {
+
+    width: 100%;
+    min-width: inherit;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    background-color: darkslategrey;
+    color: whitesmoke
+}
+
+/* mobile / retina */
+@media (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
+    :root {
+        --base-font-size: xx-large;
+    }
+}
