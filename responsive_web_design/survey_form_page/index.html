@@ -5,12 +5,13 @@
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
+        <div id="background-div"></div>
         <header>
             <h1 id="title">FCC Project Survey</h1>
             <p id="description">Please fill out this form to let me know your thoughts about this project page.</p>
-            
         </header>
         <main>
+            
             <form id="survey-form" action="">
                 <div class="form-dataset">
                     <label for="name" id="name-label">Name:</label>
@@ -37,35 +38,44 @@
                 </div>
                 <div class="form-dataset">
                     <label>I am a...</label>
-                    <span>
+                    <div id="radio-inner">
                         <input type="radio" name="ama" value="student" id="student" required><label for="student">Student</label>
-                    </span>
-                    <span>
                         <input type="radio" name="ama" value="professional" id="professional"><label for="professional">Professional</label>
-                    </span>
-                    <span>
                         <input type="radio" name="ama" value="neither" id="neither"><label for="neither">Neither</label>
-                    </span>
+                    </div>
                 </div>
                 <div class="form-dataset">
-                    <label for="technologies">Which technologies are you familiar with?<i style="font-size: smaller"> check all that apply</i></label>
+                    <label for="technologies">Which technologies or languages are you familiar with?
+                        <i style="font-size: smaller"><span style="display:inline-block;">check all that apply</span></i></label>
                     <div id="technologies-inner">
                         <span>
-                            <input type="checkbox" name="technologies" value="js" id="js">
-                            <label for="js">JavaScript</label>
+                            <input type="checkbox" name="technologies" value="js" id="js"><!--
+                         --><label for="js">JavaScript</label>
                         </span>
                         <span>
-                            <input type="checkbox" name="technologies" value="php" id="php">
-                            <label for="php">PHP</label>
+                            <input type="checkbox" name="technologies" value="php" id="php"><!--
+                         --><label for="php">PHP</label>
                         </span>
                         <span>
-                            <input type="checkbox" name="technologies" value="react" id="react">
-                            <label for="react">React</label>
+                            <input type="checkbox" name="technologies" value="react" id="react"><!--
+                         --><label for="react">React</label>
+                        </span>
+                        <span>
+                            <input type="checkbox" name="technologies" value="ccpp" id="ccpp"><!--
+                         --><label for="ccpp">C/C++</label>
+                        </span>
+                        <span>
+                            <input type="checkbox" name="technologies" value="java" id="java"><!--
+                         --><label for="java">Java</label>
+                        </span>
+                        <span>
+                            <input type="checkbox" name="technologies" value="python" id="python"><!--
+                         --><label for="python">Python</label>
                         </span>
                     </div>
                 </div> 
                 <div class="form-dataset">
-                    <label for="input-text">Please give a short answer as to what you think of this small website</label>
+                    <label for="input-text">Please submit a short feedback comment.</label>
                     <textarea id="input-text" required placeholder="Enter your comment here..."></textarea>
                 </div>
                 <button id="submit" type="submit">Submit answers</button>
@@ -73,7 +83,8 @@
         </main>
         <footer><p style="font-style: italic;">Note: this survey was only made for education purposes, and no personal data will
             be submitted.
-        </p></footer>
+        </p>
+    <p style="font-size: x-small">&copy; 2021 Marcus Benrud - All rights reserved</p></footer>
     </body>
     <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
 </html>

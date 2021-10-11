@@ -2,9 +2,24 @@
 
 :root {
     --base-font-size: large;
+    --color-1: #efefef;
+    --color-2: #222;
 }
 
+
+
 /* body / general */
+
+#background-div {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://raw.githubusercontent.com/marcus-rb/websrouce/main/TexturesCom_BokehNight0178_M.jpg");
+    background-size: cover;
+    z-index: -1;
+    top: 0;
+    left: 0;
+}
 
 html {
     font-family: "Inter", sans-serif;
@@ -20,7 +35,9 @@ body {
 
 /* header stuff */
 header {
+    color: #efefef;
     text-align: center;
+    padding: auto 10px auto 10px;
 }
 
 header p {
@@ -33,7 +50,9 @@ main {
     max-width: 800px;
     margin: 30px auto 30px auto;
     padding: 10px;
-    border: 1px solid black;
+
+    color: white;
+    background-color: rgba(0,0,0,0.5);
 }
 
 div.form-dataset {
@@ -63,6 +82,7 @@ div.form-dataset > span {
 #technologies-inner {
     display: flex;
     flex-wrap: wrap;
+    color: black;
 }
 
 #technologies-inner > span {
@@ -80,6 +100,35 @@ textarea {
     font-size: var(--base-font-size);
 }
 
+#submit {
+    box-sizing: border-box;
+
+    margin: auto;
+    width: 100%;
+    font-size: larger;
+    padding: 10px;
+
+    color: var(--color-1);
+    background-color: rgb(47, 79, 79);
+    border: 1px solid rgba(0,0,0,00);
+    border-radius: .5em;
+    transition: 0.1s;
+}
+
+#submit:hover {
+    cursor: pointer;
+    background-color: rgb(67, 99, 99);
+    color: #fff;
+    transition: 0.2s;
+}
+
+#submit:active {
+    border: 1px solid white;
+    background-color: #ccc;
+    color: black;
+    transition: 0.05s;
+}
+
 /* footer */
 footer {
 
@@ -90,12 +139,15 @@ footer {
     left: 0;
     text-align: center;
     background-color: darkslategrey;
-    color: whitesmoke
+    color: var(--color-1)
 }
 
 /* mobile / retina */
 @media (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
     :root {
         --base-font-size: xx-large;
+    }
+    main {
+        background-color: rgba(0,0,0,0.7);
     }
 }
