@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap'); /* Roboto font */
+
+:root {
+    --base-font-size: large;
+    --color-1: #050505;
+    --color-2: #dfdfdf;
+}
+
+/* general and background */
+html {
+    font-family: "Roboto", sans-serif;
+    font-size: var(--base-font-size);
+}
+
+body, header, main, footer, div, h1 {
+    margin: 0px;
+    padding: 0px;
+
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 500px;
+}
+
+#background-div {
+
+    background-image: url("https://raw.githubusercontent.com/marcus-rb/websrouce/main/IMG-1949.jpg");
+    background-color: var(--color-2);
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* header */
+header {
+    background-color: var(--color-1);
+    color: var(--color-2);
+    padding: 0.5em;
+    padding: 0 2em 0 2em;
+
+    min-width: 500px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+header h1 {
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+#header-img {
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
+    object-fit: cover;
+
+    max-height: 7em;
+    margin-right: 1.5em;
+}
+
+#title-div {
+    display: flex;
+    align-items: center;
+}
+
+#nav-bar {
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1em;
+    font-size: larger;
+    justify-content: space-evenly;
+}
+
+.nav-link {
+    text-align: center;
+    width: 6em;
+    background-color: #151515;
+    padding: 0.5em;
+}
+
+/*main and intro*/
+main {
+    width: 100%;
+    background-color: var(--color-2);
+    height: 100px;
+}
+
+#intro-text-container {
+    height: calc(100vh);
+    min-height: 300px;
+    
+    position: relative;
+}
+
+#intro-text-inner {
+    position: absolute;
+    bottom: 3em;
+    left: 20%;
+    background-color: #efefef;
+    padding: 1em;
+    font-style: italic;
+}
+
+
+/* break navbar into own menu*/
+@media (max-width: calc(950px)), (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+    header {
+        flex-direction: column;
+        align-content: center;
+    }
+    #title-div {
+        margin-bottom: -1.5em;
+    }
+    #nav-bar {
+        padding-bottom: 1em;
+    }
+    
+}
