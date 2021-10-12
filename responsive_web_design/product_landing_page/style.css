@@ -29,7 +29,7 @@ body {
     background-color: var(--color-2);
     background-size: cover;
     background-position: center;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
 
@@ -46,15 +46,18 @@ header {
     padding: 0 2em 0 2em;
 
     min-width: 500px;
+    width: 100%;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
-    width: 100%;
+    z-index: 1;
+
+    margin-bottom: -7em;
 }
 
 header h1 {
@@ -86,10 +89,19 @@ header h1 {
 }
 
 .nav-link {
+    color: inherit;
+    text-decoration: none;
+
     text-align: center;
     width: 6em;
     background-color: #151515;
     padding: 0.5em;
+    transition: 0.1s;
+}
+
+.nav-link:hover {
+    background-color: #222;
+    transition: 0.1s;
 }
 
 /*main and intro*/
@@ -100,27 +112,44 @@ main {
 }
 
 #intro-text-container {
-    height: calc(100vh);
+    height: 100vh;
+    width: calc(100%);
     min-height: 300px;
-    
+    min-width: 500px;
+
     position: relative;
 }
 
 #intro-text-inner {
     position: absolute;
-    bottom: 3em;
-    left: 20%;
-    background-color: #efefef;
+    top: 50%;
+    left: 5%;
+    margin-right: 5%;
+
+    background-color: whitesmoke;
     padding: 1em;
     font-style: italic;
+    font-size: larger;
+
+    box-sizing: border-box;
+    border-top: 0.2em solid black;
+
+    display: flex;
+}
+
+#intro-text-inner h1 {
+    flex-shrink: 0;
+    display: inline-block;
 }
 
 
+
 /* break navbar into own menu*/
-@media (max-width: calc(950px)), (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+@media (max-width: 950px), (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait), (min-resolution: 2dppx) and (orientation: portrait) {
     header {
         flex-direction: column;
         align-content: center;
+        margin-bottom: -9.4em;
     }
     #title-div {
         margin-bottom: -1.5em;
@@ -128,5 +157,4 @@ main {
     #nav-bar {
         padding-bottom: 1em;
     }
-    
 }
