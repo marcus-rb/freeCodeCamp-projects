@@ -152,7 +152,35 @@ main > * {
     min-width: 400px;
 }
 
+main img {
+    display: block;
+}
+
+.selection-grid {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: auto auto;
+    grid-template-areas: "img heading" "img text";
+}
+
+.selection-grid img {
+    grid-area: img;
+    max-height: 9em;
+}
+.selection-grid p {
+    grid-area: text;
+}
+
+.selection-grid h3 {
+    grid-area: heading;
+}
+
 /* footer */
+#landing-image {
+    background-color: var(--color-2);
+    margin-bottom: -1em;
+}
+
 footer {
     padding: 1em;
     background-color: darkslategray;
