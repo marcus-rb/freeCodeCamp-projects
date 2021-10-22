@@ -3,83 +3,150 @@
     <head>
         <title>John's Jets</title>
         <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="icon" tyoe="image/svg" href="..\vectors\johnsjets_logo_white.svg">
+        <meta name="viewport" content="width = device-width, initial-scale=1">
     </head>
-    <body>
-        <div id="background-div"></div>
+    <body><div id="background-div">
+        <video id="video" autoplay muted loop>
+            <source src="https://raw.githubusercontent.com/marcus-rb/websrouce/main/Sequence%20%231.mp4">
+        </video>
+    </div>
         <header id="header">
-            <div id="title-div">
-                <img id="header-img" src="https://raw.githubusercontent.com/marcus-rb/websrouce/443df5359d7a71b2e1500872923cbf9e1bb6095f/johnsjets%20logo.svg">
-                <h1><i>John's Jets</i></h1>
+            <div id="title">
+                <div id="title-flex">
+                    <img id="header-img" src="..\vectors\johnsjets_logo_white.svg">
+                    <h1>John's Jets</h1>
+                </div>
+                <p><i>Apex pre-owned aircraft</i></p>
             </div>
             <nav id="nav-bar">
-                <a class="nav-link" id="nav-why" href="#whyjohns">Why John's?</a>
-                <a class="nav-link" id="nav-stock" href="#stock">Stock</a>
-                <a class="nav-link" id="nav-contact" href="#contact">Contact</a>
+                <a class="nav-link" href="#whyjohns" onclick="push_scroll()">Why John's?</a>
+                <a class="nav-link" href="#stock" onclick="push_scroll()">Stock</a>
+                <a class="nav-link" href="#contact" onclick="push_scroll()">Contact</a>
             </nav>
         </header>
-        <div id="intro-text-container">
-            <div id="intro-text-inner">
-                <h1 id="intro-text">Certified, serviced, proven</h1>
-                <div id="intro-arrow-container">
-                    <div id="arrow-elem-1" class="arrow-elem"></div>
-                    <div id="arrow-elem-2" class="arrow-elem"></div>
-                    <div id="arrow-elem-3" class="arrow-elem"></div>
-                    <div id="arrow-elem-4" class="arrow-elem"></div>
-                </div>
-            </div>
-        </div>
         <main>
-            <section id="whyjohns">
-                <h2>Why choose John's Jets</h2>
-                <p>At John's we understand your need for a product that goes beyond your expectations 
+            <section id="whyjohns"><!-- add grid yadayada for desktop-->
+                <h2>Why choose John's?</h2>
+                <p>
+                    At John's we understand your need for a product that goes beyond your expectations 
                     in all areas. That is why all our jets go through a lengthy selection process. Read how all
                     our jets adhere to our company values.
-                    <div id="selection">
-                        <div class="selection-grid">
-                            <h3>Certified</h3>
-                            <p>All jets are certified as original from the manufacturer, and their complete
-                                nothing-left-out flight record come standard with every jet, giving you total
-                                knownledge and security.
-                            </p>
-                            <img src="vectors/certified.svg">
-                        </div>
-                        <div class="selection-grid">
-                            <h3>Serviced</h3>
-                            <p>Any jet that has anything not done in accordance with manufacturer service recommendations
-                                is instantly disqualified to be sold through John's. With us, you know what you're getting,
-                                and how you're getting it.
-                            </p>
-                        </div>
-                        <div class="selection-grid">
-                            <h3>Proven</h3>
-                            <p>Every plane we buy has proven itself through difficult conditions, conditions that is has been built to
-                                handle. This is because we believe that when the product lives up to its own standard we can fascilite
-                                your new jet ownership with a confidence in its future success.
-                            </p>
+                </p>
+                <div id="why-container">
+                    <div class="why-card">
+                        <h3>Certified</h3>
+                        <p>All jets are certified as original from the manufacturer, and their complete
+                            nothing-left-out flight record come standard with every jet, giving you total
+                            knownledge and security.
+                        </p>
+                    </div>
+                    
+                    <div class="why-card">
+                        <h3>Serviced</h3>
+                        <p>Any jet that has anything not done in accordance with manufacturer service recommendations
+                            is instantly disqualified to be sold through John's. With us, you know what you're getting,
+                            and in which condition.
+                    </div>
+                    
+                    <div class="why-card">
+                        <h3>Proven</h3>
+                        <p>
+                            Every plane we buy has proven itself through difficult conditions, conditions that is has been built to
+                                    handle. This is because we believe that when the product lives up to its own standard we can fascilite
+                                    your new jet ownership with a confidence in its future success.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <img src="..\vectors\g7500-01.svg">
+            <section id="stock">
+                <h2>In stock</h2>
+                <p>
+                    Our mission is to always have a jet ready for every customer, no matter who it is. That is why every collection
+                    is diverse. Once a plane is united with a new owner, we will work diligently to replace the missing offer type 
+                    as soon as possible. <br><br>Click on a jet to reveal more info.
+                </p>
+                <div id="stock-inner">
+                    <div class="stock-card"  id="stock-f15">
+                        <div class="stock-background"></div>
+                        <img class="stock-card-desc" src="images/f15_banner.jpg">
+                        <div class="stock-card-inner">
+                            <h2>F-15 Eagle</h2>
+                            <p>
+                            Manufacturer: Boeing</br>
+                            Category: Military fighter</br>
+                            Production year: 1989</br>
+                            Range / Combat range: 3000nm / 1061nm</p>
                         </div>
                     </div>
-                </p>
+                    <div class="stock-card" id="stock-da20">
+                        <div class="stock-background"></div>
+                        <img class="stock-card-desc" src="images/da20_banner.jpg">
+                        <div class="stock-card-inner">
+                            <h2>DA20 Jet Falcon</h2>
+                            <p>
+                            Manufacturer: Dassault Aviation</br>
+                            Category: Electronic Warfare jet</br>
+                            Production year: 1970</br>
+                            Range: 2080nm</p>
+                        </div>
+                    </div>
+                    <div class="stock-card" id="stock-l45">
+                        <div class="stock-background"></div>
+                        <img class="stock-card-desc" src="images/learjet45_banner.jpg">
+                        <div class="stock-card-inner">
+                            <h2>Learjet 45XR</h2>
+                            <p>
+                            Manufacturer: Bombardier Learjet</br>
+                            Category: Business jet</br>
+                            Production year: 2017</br>
+                            Range: 1968nm</p>
+                        </div>
+                    </div>
+                </div>
+                <p>MSRP, flight hours, registration and other data only availible on request in order to respect the privacy of our sellers.</p>
             </section>
-            <img src="vectors/g7500-01.svg">
-            <section id="stock">
-                <h2>In Stock</h2>
-                <p>We hope to always proved an option for every customer. That is why every selection is diverse. Every time
-                    a plane is united with a new owner, a new John's Jet becomes availible as soon as it satisfies our strict standards.
-                </p>
-            </section>
-            <img src="vectors/f35.svg">
+            <img src="..\vectors\f35.svg">
             <section id="contact">
-                <h2>Get in touch</h2>
-                <p>Do you want to discuss acquiring a John's Jet? Leave your e-mail, and we will contact you within 48 hours.</p>
+                <h2>Contact</h2>
+                <p>Do you want to discuss acquiring a John's Jet? Leave your e-mail and we will be in touch in no more than 48 hours!</p>
+                <form id="form" action="https://www.freecodecamp.com/email-submit">
+                    <input id="email" type="email" name="email" placeholder="yourname@mail.ext" required>
+                    <input type="submit" id="submit" value="Submit">
+                </form>
             </section>
+            
         </main>
-        <img src="vectors/b747_landing-01.svg" id="landing-image">
+        <img src="..\vectors\b747_landing-01.svg">
         <footer>
-            <p>Disclaimer: This website was made for education purposes only. I am in no way affiliated with Lockheed Martin,
-                Boeing, Bombardier or any other aircraft manufacturer. All illustrations and photos are mine. &copy; 2021 Marcus Benrud
+            <p>&copy 2021 Marcus Benrud - all vector illustrations and content with listed exceptions.</p>
+            <div>
+                Photos:
+                <a target="_blank" href="https://w0.peakpx.com/wallpaper/711/1/HD-wallpaper-f-22-raptor-aircraft-airforce-airplane-jet-jets-us.jpg">F22 banner image</a>
+                <a target="_blank" href="https://www.britannica.com/technology/F-15">F15 display image</a>
+                <a target="_blank" href="https://www.nationaldefensemagazine.org/articles/2019/4/26/fighting-over-fighter-jets-pentagon-plan-to-buy-f-15ex-sparks-controversy">F15 background image</a>
+                <a target="_blank" href="https://arcticroost.org/____impro/1/Bilder/041%20Ovenfra.jpg?etag=%221d3c2-58ad8b38%22&sourceContentType=image%2Fjpeg&ignoreAspectRatio&resize=631,459">DA20 display image</a>
+                <a target="_blank" href="https://www.forsvaret.no/om-forsvaret/utstyr-og-materiell">DA20 background image</a>
+                <a target="_blank" href="https://www.aircharter.com.br/en/aircraft-guide/private/bombardier-canada/bombardierlearjet4545xr">Learjet 45 display image</a>
+                <a target="_blank" href="https://en.wikipedia.org/wiki/Learjet_45#/media/File:Bombardier_Learjet_45_Gama_Aviation_(GMA)_G-ZXZX_-_MSN_45-005_(5590120278).jpg">Learjet 45 background-image</a>
+            </div>
+            <p>Banner video clips extracted from <a target="_blank" href="https://youtu.be/PdnIV2Oz7Vo">this video</a></p>
+            <p>
+                Disclaimer: This website was made for educational purposes and does not vendor aircraft. I am in no way affiliated with Lockheed Martin, Northrop Grumman, Bombardier, Boeing or any other aircraft manufacturer.
             </p>
         </footer>
     </body>
     <script type="text/ecmascript" src="script.js"></script>
-    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+    
+    <script type="text/ecmascript" src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+    
 </html>
+
+<!-- TODO 
+[ ] - In stock cards
+    - picture with header that slides left or right when clicked; (position absolute, then either right 0 or left 0)
+[ ] - add a fitting place for a video
+[ ] - gjøre side responsive for desktop
+-->
