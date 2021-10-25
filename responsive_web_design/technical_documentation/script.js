@@ -7,8 +7,8 @@ const toggle_navbar = () => {
         navbar_toggle.classList = ""
         navbar_toggle.innerHTML = "&gt;"
     } else {
-        navbar.classList = "nav-small-reveal";
         navbar_toggle.classList = "nav-small-toggle-reveal";
         navbar_toggle.innerHTML = "&lt";
+        navbar.classList = "nav-small-reveal";
     }
 }

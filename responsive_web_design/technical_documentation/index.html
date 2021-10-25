@@ -21,7 +21,7 @@
                 <a class="nav-link" href="#Templates">Templates</a>
                 <a class="nav-link" href="#Polymorphism">Polymorphism</a>
                 <a class="nav-link" href="#Standard_library">Standard library</a>
-                <a class="nav-link" href="#Reference">Reference</a>
+                <a class="nav-link" href="#Reference" style="border-bottom: 1px solid black">Reference</a>
             </div>
         </nav>
         <main id="main-doc">
@@ -29,9 +29,11 @@
                 <header>
                     <h1>Introduction</h1>
                 </header>
-                <p>C++ is a general purpose programming language created as an extension of the C language. Originally it was called "C with Classes,"
-                    but as more features were integrated C++ was chosen as the name. It is most often implemented as a compiled language. It is a high-level language, but does also facilite low-level 
-                memory manipulation. It is perhaps most famous today for its possibility for high performance and thus usage in video game development.
+                <p>C++ is a general purpose programming language created as an extension of the C language. It is most often implemented as a compiled language. Techincally C++ is a high level language which features
+                    low level memory management, but it is not uncommon to refer to it as either "mid level" or low level when comparing it to languages with more overhead, like JavaScript or Python.
+                     It is perhaps most famous today for its possibility for high performance and thus usage in video game development and other task intensive time critical applications.
+                      A <a target="_blank" href="https://www.jetbrains.com/lp/devecosystem-2021/?source=google&medium=cpc&campaign=14530723176&gclid=CjwKCAjwq9mLBhB2EiwAuYdMtdRhuaDDDZB4hbxmlzS2VAhh8ltTuIiqhjgUy0f90TFrBHUy2_I2AxoCBBAQAvD_BwE">JetBrains Ecosystem analysis</a>
+                reveals that 23% of developers had used C++ in the last 12 months, and 4% reported they we're planning to adopt it.
                 </p><p>
                 This documentation provides basic information about C++, and you should have a general understanding of programming to get the most out of the content.
             </p>
@@ -41,23 +43,23 @@
                     <h1>History</h1>
                 </header>
                 <p>The creator of C++, Bjarne Stroustrup, began working on "C with Classes" in 1979. The language was created because Stroustrup
-                    wanted to integrate features from languages he found useful, but not strong enough on their own, especially Simula, which was 
-                    good for large software development, but too slow, and BCPL, which was fast, but too low-level. Stroustrup chose C as his 
-                    basis as it was general-purpose, fast, portable and already in wide use. C++ was created in 1982, as an updated version of "C with Classes."
-                    The name was chosen as "++" is in C as with many other languages the increment operator: C++ was the next step up from C. 
+                    wanted to integrate features from languages he found useful, but not strong enough on their own. He wanted the features of Simula with the speed of BCPL.
+                    Stroustrup chose C as his 
+                    basis because it was general-purpose, fast, portable and already in widespread use. C++ was officially created in 1982, as an updated version of "C with Classes."
+                    The increment operator, ++, was appended to the name as C++ was the natural evolution of C.
                 </p>
                 <p>
-                    C++ has been on a three-year update schedule ever since 2011, and has had three stable releases after the original version; C++03, C++98 and C++2.0.
-                    The 1998-release was the first standardized version, under a specific ISO group. 
+                    C++ has been on a three-year update schedule ever since 2011, with three previous updates; C++03, C++98 and C++2.0.
+                    The 1998-release was the first standardized version, bringing C++ into the ISO.
                 </p>
                 <p>
-                    Further development of the C++ language follows a guiding philosophy, which consits of a set of principles:
+                    Development of the C++ language follows a philosophy construed by a set of principles:
                     <ul>
-                        <li>It must be driven by actual problems, and features should be immediately useful.</li>
-                        <li>Every feature should be implementable</li>
+                        <li>C++ must be driven by actual problems, and features should be immediately useful.</li>
+                        <li>Every feature should be implementable in a reasonably obvious manner</li>
                         <li>Programmers should be able to freely pick any programming style, and have that style supported by C++</li>
                         <li>Allowing useful features take priority over preventing misuse of the language</li>
-                        <li>It should provide facilities for organizing and creating code in separate and well-defined parts, as well as tools for joing said parts together</li>
+                        <li>C++ should provide facilities for organizing and creating code in separate and well-defined parts, as well as tools for joing those parts together</li>
                         <li>There should be no implicit violations of the type system</li>
                         <li>User created types must have the same support and performance as built-in types</li>
                         <li>Unused features should not affect performance negatively</li>
@@ -134,31 +136,71 @@
                 <header>
                     <h1>Language features</h1>
                 </header>
+                <p>
+                    As C++ has grown in the 21st century a lot of modern features have been added. This does not subtract from the basic language features. The syntax
+                    of C++ is very similar to that of C, as most of it is inherited. In c++ objects can have static, thread or dynamic storage durations. The user determines
+                    this manually. All objects not created thread level or dynamically are static storage objects. C++ also supports block level storage, which falls under
+                    the category of automatic storage duration. 
+                </p>
+                <p>
+                    C++ supports classes providing all four features commonly present in object oriented programming languages: abstraction, encapsulation, inheritance
+                    and polymorphism. C++ also distinguishes itself from other languages by supporting deterministic destructors. C++ abstraction can be done in pretty 
+                    much any way the user sees fit, and the great support for operator overloading makes the case that user-built types can behave and perform on the level
+                    of built-in types.
+                </p>
             </section>
             <section class="main-section" id="Templates">
                 <header>
                     <h1>Templates</h1>
                 </header>
+                <p>
+                    A feature C++ is famous for is the template feature. It is easily distunguished by the use of the <code>template</code> keyword, often followed by one or more
+                    template arguments in angle brackets. Templates are highly useful for generic programming. Instead of overloading a function to fit several data types, 
+                    a template will often suffice, keeping the code clean. Templates are compiled and cannot be passed dynamic objects as arguments as this would make the impossible
+                    to determine in static computation. This means that you cannot send template arguments out of an if-statement that cannot be determined at compile-time. Here is an
+                    example of a template function that deallocates dynamic memory:
+                </p>
+                <code class="block-code">
+                    template &lt;typename T&gt;<br>
+                    void deallocate(T* ptr, size_t amount = 1) {
+                    <pre>   ::operator delete((void*)ptr, sizeof(T)*amount);</pre>
+                    }
+                </code>
+                <p>the <code>deallocate</code> function template takes one template argument: T, the type. The function then uses the type to determine
+                how much memory should be freed. For example, deallocating four <code>int</code>s frees more space than four <code>char</code>s, with a respective
+            size of 4 and 1 byte. Calling <code>deallocate&lt;int&gt;(&myIntegers, 2)</code> would at compile-time generate the same function with the expression <code>sizeof(T)</code> replaced with <code>sizeof(int)</code>,
+        which of course is 4. Then our arguments would be passed in. In this case <code>&myIntegers</code> gets us the memory address of <code>myIntegers</code>, a two-integer array. The appropriate call 
+        is made to <code>::operator delete</code>, and our memory is released. <i>Note that it in most cases is easier to use the <code>delete[]</code> keyword to release memory. This function
+        was written as part of creating a custom memory allocator for automatic garbage collection.</i>
             </section>
             <section class="main-section" id="Polymorphism">
                 <header>
                     <h1>Polymorphism</h1>
                 </header>
+                <p>
+                    C++'s object oriented aspects allow for common polymorphism through inheritance, both private, public and protected. In addition to this functions 
+                    can be overloaded to take and return different arguments and types while still keeping their name. Template programming uses this feature. You can 
+                    also assign any type to any set of data you have the address of, as types are not strictly enforced. This is referred to as type punning.
+                </p>
             </section>
             <section class="main-section" id="Standard_library">
                 <header>
                     <h1>Standard library</h1>
                 </header>
+                <p>
+                    The C++ standard consists of both the core language and the standard library. Most expect to find the standard library included in any major implementation
+                    of C++. The C++ standard library is quite extensive and provides 105 standard headers. 27 are deprecated. 
+                </p>
             </section>
             <section class="main-section" id="Reference">
                 <header>
                     <h1>Reference</h1>
                 </header>
+                <p>
+                    All information is taken from the <a target="_blank" href="https://en.wikipedia.org/wiki/C%2B%2B">C++ wikipedia page</a> and <a target="_blank" href="https://en.cppreference.com/w/">reference page</a>
+                </p>
             </section>
         </main>
-        <footer>
-
-        </footer>
     </body>
     <script type="text/ecmascript" src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
     <script type="text/ecmascript" src="script.js"></script>

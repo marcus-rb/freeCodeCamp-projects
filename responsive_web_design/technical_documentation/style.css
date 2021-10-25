@@ -111,12 +111,34 @@ body {
 
 nav h1 {
     text-align: center;
+    padding: 0.5em;
 }
 
 
 #nav-inner {
     display: flex;
     flex-direction: column;
+}
+
+.nav-link {
+    padding: 1em;
+    color: inherit;
+
+    border-top: 1px solid black;
+
+    text-decoration: unset;
+    
+    transition: 0.1s;
+}
+
+.nav-link:hover {
+    background-color: #eee;
+    transition: 0.1s;
+}
+
+.nav-link:active {
+    background-color: #ddd;
+    transition: 0.1s;
 }
 
 /* ----- MAIN AREA ----- */
