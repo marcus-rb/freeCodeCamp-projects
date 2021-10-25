@@ -29,24 +29,106 @@
                 <header>
                     <h1>Introduction</h1>
                 </header>
-                <p>C++ is a general purpose programming language created as an extension of the C language. It was originally called 
-                    "C with Classes." Modern C++ has expanded significantly and today includes features like 
-                </p>
+                <p>C++ is a general purpose programming language created as an extension of the C language. Originally it was called "C with Classes,"
+                    but as more features were integrated C++ was chosen as the name. It is most often implemented as a compiled language. It is a high-level language, but does also facilite low-level 
+                memory manipulation. It is perhaps most famous today for its possibility for high performance and thus usage in video game development.
+                </p><p>
+                This documentation provides basic information about C++, and you should have a general understanding of programming to get the most out of the content.
+            </p>
             </section>
             <section class="main-section" id="History">
                 <header>
                     <h1>History</h1>
                 </header>
+                <p>The creator of C++, Bjarne Stroustrup, began working on "C with Classes" in 1979. The language was created because Stroustrup
+                    wanted to integrate features from languages he found useful, but not strong enough on their own, especially Simula, which was 
+                    good for large software development, but too slow, and BCPL, which was fast, but too low-level. Stroustrup chose C as his 
+                    basis as it was general-purpose, fast, portable and already in wide use. C++ was created in 1982, as an updated version of "C with Classes."
+                    The name was chosen as "++" is in C as with many other languages the increment operator: C++ was the next step up from C. 
+                </p>
+                <p>
+                    C++ has been on a three-year update schedule ever since 2011, and has had three stable releases after the original version; C++03, C++98 and C++2.0.
+                    The 1998-release was the first standardized version, under a specific ISO group. 
+                </p>
+                <p>
+                    Further development of the C++ language follows a guiding philosophy, which consits of a set of principles:
+                    <ul>
+                        <li>It must be driven by actual problems, and features should be immediately useful.</li>
+                        <li>Every feature should be implementable</li>
+                        <li>Programmers should be able to freely pick any programming style, and have that style supported by C++</li>
+                        <li>Allowing useful features take priority over preventing misuse of the language</li>
+                        <li>It should provide facilities for organizing and creating code in separate and well-defined parts, as well as tools for joing said parts together</li>
+                        <li>There should be no implicit violations of the type system</li>
+                        <li>User created types must have the same support and performance as built-in types</li>
+                        <li>Unused features should not affect performance negatively</li>
+                        <li>There should be no language beneath C++, except for platform specific assembly language.</li>
+                        <li>C++ should work alongside other programming languages, and not foster its own incompatible environment</li>
+                        <li>If the programmer's intent is unknown, the programmer should be able to specify it via manual control</li>
+                    </ul>
+                </p>
             </section>
             <section class="main-section" id="C++,_C,_C#">
                 <header>
                     <h1>C++, C, C#</h1>
                 </header>
+                <p>C++ is considered a superset of C, as all valid C-code is also valid C++ code. C#, although having a similar name is built 
+                    on a different principle, and has features like garbage-collection that would violate C and C++'s fundamental principles about
+                user-control. C# is a younger language, and besides syntax shares little with C and C++. C# is also mostly just used on Windows, while
+            C and C++ can run in any environment that offers a suitable compiler. </p>
             </section>
             <section class="main-section" id="Hello_World">
                 <header>
                     <h1>Hello World</h1>
                 </header>
+                <p>
+                    C++ can be quite the complex language to learn, especially if programming is new to you. To demonstrate this we can look at 
+                    a common way to write the "Hello World!" program:
+                </p>
+                <code class="block-code">
+                    #include &lt;iostream&gt;<br>
+                    <br>
+                    int main() {<br>
+                    <pre>    std::cout &lt;&lt; "Hello World" &lt;&lt; std::endl;<br></pre>
+                    <pre>    return 0;<br></pre>
+                    }
+                </code>
+                <p>Let's start at the top. <code>#include</code> is a pre-processor directive that takes whatever file comes after
+                and simply pastes the file in place. Yes, <code>iostream</code> is a file without an extension. The angle brackets are
+            typically used to tell the editor that the given file is to be found in the pre-processors include path. That would make sense
+            when we're using a <i>standard library header</i>, like iostream. You can also create your own header files and use normal double quotes
+            to include a file from a relative path. This also introduced us to the C++ pre-processor, which is what runs before the compiler.</p> 
+            <p>
+                So, what's up with <code>int main()</code>? Well, all C++ programs require a point of entry, the entry function. Usually
+                this is preset as <code>main</code>. Some editors let you pick your own entry function. The <code>int</code> part signifies
+                the return type of the function, and will be the exit code of our program. The last function to stop executing given proper 
+                crash free execution is always the entry function, so setting up various return statements given conditions can help with debugging
+                and understanding how our program executed. 0 is usually picked as the default success code, and thus we also have a 
+                <code>return 0;</code> statement before the end of our function. Some compilers will allow you to omit the return statement for 
+                cleaner code. This does not mean that it is not there, but the compiler puts it there for you.
+            </p>
+            <p>
+                Okay so now the line we haven't spoken about. There's a lot more to unpack here. First, let's take a look at <code>std::cout &lt;&lt;</code>. 
+                Here we have a function call. Yes, not exactly an intuitive syntax. First we are accessing the <i>namespace</i> called 
+                <code>std</code>, using the name and the <i>namespace access operator.</i> That would be the two colons. Inside <code>std</code> we
+                call the <code>&lt;&lt;</code> operator on the <code>cout</code> class. Think of operators as functions. C++ supports operator overloading, so 
+                this bitshift operator now functions as the <i>insertion operator</i>. The text-string <code>"Hello World!"</code> is actually the function argument. Next comes 
+                another insertion operator. Imagine this as chaining functions like you would normally do with a <code>.someFunc()</code>. <code>std::endl</code> is an object 
+                also in the std namespace that does some things to the current iostream, like flushing the stream and performing a carriage return. As you might understand, you can take
+                a deep dive into any line here and be stuck for a few hours. This complexity is what turns some people off, but is also what allows a really competent programmer to
+                create lightning fast code. So, here's a statement by statement explanation of the "Hello World!"-program:
+            </p>
+            <code class="block-code">
+                #include &lt;iostream&gt; //copies the file 'iostream' into the document.
+                <br>
+                <br>
+                int main() { //start of definition of our main-function, the point where the program will start execution.
+                <pre>   std::cout &lt;&lt; //call "&lt;&lt;" on cout in the std namespace.</pre>
+                <pre>   "Hello World!" &lt;&lt; //pass "Hello World!" as the argument, and make another call to "&lt;&lt"</pre>
+                <pre>   std::endl; //pass 'endl' as argument, and terminate expression with semi-colon</pre>
+                <br>
+                <pre>   return 0; //return 0 as program exit code</pre>
+                } //end of definition of main-function
+            </code>
             </section>
             <section class="main-section" id="Language_features">
                 <header>

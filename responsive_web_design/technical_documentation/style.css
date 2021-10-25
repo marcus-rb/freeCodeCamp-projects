@@ -121,4 +121,27 @@ nav h1 {
 
 /* ----- MAIN AREA ----- */
 
+code {
+    padding: 0.1em;
+    border: 1px solid black;
+
+    background-color: #eee;
+
+    white-space: nowrap;
+}
+
+.block-code {
+    display: block;
+
+    padding: 1em;
+    border-radius: 10px;
+
+    overflow-x: auto;
+}
+
+pre {
+    margin: 0px;
+    padding: 0px;
+}
+
 /* ----- FOOTER ----- */
