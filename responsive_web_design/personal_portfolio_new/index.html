@@ -8,8 +8,15 @@
     </head>
     <body>
         <div id="explorer">
-            <div id="explorer-open-editors">
-
+            <h2>Explorer</h2>
+            <div id="explorer-open-editors" class="folder">
+                <div class="folder-header" onclick="toggle_folder(this.parentNode)">
+                    <img class="folder-toggle" src="image_files/collapse.svg">
+                    <p>Open tabs</p>
+                </div>
+                <div class="folder-inner">
+                    <p id="placeholder-open-tabs" style="padding: .5em; color: gray; text-align: center;">Nothing here yet</p>
+                </div>
             </div>
             <div id="explorer-folder" class="folder">
                 
@@ -26,8 +33,8 @@
                         </div>
 
                         <div class="folder-inner">
-                            <a class="project-link">whatIUse.mb</a>
-                            <a class="project-link">other.mb</a>
+                            <a class="project-link"><img class="file-img" src="image_files/mb_logo.svg">whatIUse.mb</a>
+                            <a class="project-link"><img class="file-img" src="image_files/mb_logo.svg">other.mb</a>
                         </div>
                     </div>
     
@@ -39,15 +46,15 @@
                         </div>
 
                         <div class="folder-inner">
-                            <a class="project-link">freeCodeCamp.mb</a>
-                            <a class="project-link">cplusplus.mb</a>
-                            <a class="project-link">blender3d.mb</a>
+                            <a class="project-link"><img class="file-img" src="image_files/mb_logo.svg">freeCodeCamp.mb</a>
+                            <a class="project-link"><img class="file-img" src="image_files/mb_logo.svg">cplusplus.mb</a>
+                            <a class="project-link"><img class="file-img" src="image_files/mb_logo.svg">blender3d.mb</a>
                         </div>
                         
     
                     </div>
     
-                    <a class="project-link">contact.mb</a>
+                    <a class="project-link"><img class="file-img" src="image_files/mb_logo.svg">contact.mb</a>
                 </div>
 
 
@@ -57,8 +64,28 @@
             &gt;
         </div>
         <div id="welcome-section" class="tab">
-            <nav id="navbar"></nav>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae ligula scelerisque, fringilla quam vitae, placerat nulla. Nam ac bibendum ante, eu blandit odio. Sed tincidunt fringilla nisi nec ornare. Integer euismod mauris nec pretium tincidunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent auctor eleifend mi in pharetra. Morbi a nisi urna. Pellentesque efficitur pellentesque tellus, sed euismod ligula imperdiet in. In sed lacus auctor, pharetra ex sit amet, auctor sapien. Vivamus molestie sit amet tellus vel imperdiet. Mauris sodales metus eu interdum faucibus. Aliquam ullamcorper lacus vel enim feugiat efficitur. Nullam dignissim massa id ultrices volutpat. Aliquam volutpat cursus est, vel pulvinar nulla tempor fringilla. </p>
+            <nav id="navbar">
+                <a class="nav-link" id="whatIUse.mb-link">
+                    whatIUse.mb<span class="close-btn">&#x2715;</span>
+                </a>
+                <a class="nav-link" id="other.mb-link" onmouse>other.mb<span class="close-btn">&#x2715;</span></a>
+                <a class="nav-link" id="freeCodeCamp.mb-link">freeCodeCamp.mb<span class="close-btn">&#x2715;</span></a>
+                <a class="nav-link" id="cplusplus.mb-link">cplusplus.mb<span class="close-btn">&#x2715;</span></a>
+                <a class="nav-link" id="blender3d.mb-link">blender3d.mb<span class="close-btn">&#x2715;</span></a>
+                <a class="nav-link" id="contact.mb-link">contact.mb<span class="close-btn">&#x2715;</span></a>
+            </nav>
+            <div id="welcome-inner">
+                <img id="welcome-img" src="image_files/portrait.jpg">
+                <h1>Welcome!</h1>
+                <p>I'm Marcus, a software developer based in Oslo, Norway. Here you can learn more about me and what I do.</p>
+                <p style="font-size: 90%; color: gray;">You haven't opened any tabs yet, start navigating using the explorer.</p>
+            </div>
+            <div class="tab" id="whatIUse.mb">tab 1</div>
+            <div class="tab" id="other.mb">tab 2</div>
+            <div class="tab" id="freeCodeCamp.mb">tab 3</div>
+            <div class="tab" id="cplusplus.mb">tab 4</div>
+            <div class="tab" id="blender3d.mb">tab 5</div>
+            <div class="tab" id="contact.mb">tab 6</div>
         </div>
     </body>
     <script type="text/javascript" src="script.js"></script>
