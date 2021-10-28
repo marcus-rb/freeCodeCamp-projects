@@ -7,6 +7,8 @@
     --color-3: #333;
     --color-4: #444;
 
+    --body-background-color: #171717;
+
     --sidebar-default-width: 20%;
     --sidebar-min-width: 300px;
     --collapse-toggle-width: 50px;
@@ -16,9 +18,13 @@ html {
     font-family: arial;
     font-weight: 500;
     color: white;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
-body, div, nav, p, h1, a, img {
+body, div, nav, p, h1, h2, a, img {
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
@@ -38,9 +44,21 @@ body, div, nav, p, h1, a, img {
     min-width: var(--sidebar-min-width);
 
     
-    background-color: #222;
+    background-color: #202020;
 
     user-select: none;
+}
+
+@media (max-width: 430px) {
+    #explorer {
+        font-size: 120%;
+    }
+}
+
+#explorer h2 {
+    font-weight: normal;
+    padding: 0.5em;
+    color: gray;
 }
 
 #explorer-sidebar {
@@ -94,12 +112,15 @@ body, div, nav, p, h1, a, img {
     max-height: 1.5em;
 }
 
-.folder-toggle {
+.folder-toggle, .project-link img {
     display: inline-block;
     max-height: 1em;
     margin-right: .5em;
     margin-left: .5em;
 
+}
+
+.folder-toggle {
     transform: rotate(90deg);
 }
 
@@ -110,12 +131,12 @@ body, div, nav, p, h1, a, img {
 .folder-inner {
     width: 100%;
     display: flex;
-    flex-direction: column
+    flex-direction: column;
 }
 
 .folder-inner > * {
     width: 100%;
-    padding-left: 15%;
+    padding-left: 10%;
 }
 
 .folder-hidden {
@@ -125,6 +146,9 @@ body, div, nav, p, h1, a, img {
 .project-link {
     padding-top: .25em;
     padding-bottom: .25em;
+
+    display: flex;
+    justify-content: flex-start;
 }
 
 .folder-header:hover , .project-link:hover {
@@ -138,14 +162,20 @@ body, div, nav, p, h1, a, img {
 
 /* ---- MAIN CONTENT AND TABS ---- */
 #welcome-section {
+
+
     position: absolute;
     top: 0;
+    z-index: 1;
 
     height: 100vh;
     width: 80%;
 
     left: 20%;
-    background-color: #111;
+    background-color: var(--body-background-color);
+
+    display: grid;
+    grid-template-rows: auto 1fr;
 }
 
 @media (max-width: 1500px) {
@@ -153,6 +183,102 @@ body, div, nav, p, h1, a, img {
         left: var(--sidebar-min-width);
         width: calc(100% - var(--sidebar-min-width));
     }
+}
+
+#welcome-inner {
+    font-size: 130%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #ddd;
+
+}
+
+#welcome-inner h1 {
+    margin-top: .3em;
+}
+
+#welcome-inner p {
+    margin: .5em;
+    max-width: 80%;
+    text-align: center;
+}
+
+#welcome-img {
+    width: 30%;
+    min-width: 200px;
+    border-radius: 50%;
+}
+
+@media (max-width: 1200px) {
+    #welcome-inner {
+        font-size: 100%;
+    }
+}
+
+nav {
+    height: auto;
+    width: 100%;
+    display: flex;
+
+    background-color: #292929;
+
+    overflow-x: auto;
+}
+
+.nav-link {
+    padding: .7em;
+    margin-left: .1em;
+    background-color: #2d2d2d;
+    cursor: pointer;
+
+    display: none;
+}
+
+.nav-link-active {
+    display: inline-block;
+}
+
+.nav-link-view {
+    display: inline-block;
+    font-style: italic;
+}
+
+.close-btn {
+
+    text-align: center;
+
+    width: 20px;
+    height: 20px;
+
+    margin-left: .2em;
+    cursor: pointer;
+    padding: .25em;
+    border-radius: 25%;
+
+    visibility: hidden;
+}
+.close-btn:hover {
+    background-color: #444;
+}
+
+.visible {
+    visibility: visible !important;
+}
+
+.nav-in-focus {
+    background-color: var(--body-background-color);
+}
+
+/* TABS */
+.tab {
+    display: none;
+}
+
+.tab-view {
+    display: unset;
 }
 
 /* AT LESS THAN 900PX: SIDEBAR IS COLLAPSIBLE */
