@@ -1,0 +1,173 @@
+/* ----- GENERAL DOCUMENT SETUP SECTION ----- */
+
+/* --- global variables --- */
+:root {
+    --color-1: #111;
+    --color-2: #222;
+    --color-3: #333;
+    --color-4: #444;
+
+    --sidebar-default-width: 20%;
+    --sidebar-min-width: 300px;
+    --collapse-toggle-width: 50px;
+}
+
+html {
+    font-family: arial;
+    font-weight: 500;
+    color: white;
+}
+
+body, div, nav, p, h1, a, img {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+
+/* ----- SIDEBAR ------ */
+#explorer {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+
+    height: 100vh;
+    width: var(--sidebar-default-width);
+    min-width: var(--sidebar-min-width);
+
+    
+    background-color: #222;
+
+    user-select: none;
+}
+
+#explorer-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--color-3);
+
+    font-size: 200%;
+
+    height: 100vh;
+    width: 40px;
+
+    display: none;
+
+    z-index: 2;
+
+    transition: 0.15s;
+    cursor: pointer;
+}
+#explorer-sidebar:hover {
+    background-color: #444;
+    
+}
+.side-content-visible {
+    display: unset !important;
+}
+
+#explorer-open-editors, #explorer-folder {
+    border-bottom: 1px solid var(--color-3);
+}
+
+.folder {
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.folder-header {
+    width: 100%;
+
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    max-height: 1.5em;
+}
+
+.folder-toggle {
+    display: inline-block;
+    max-height: 1em;
+    margin-right: .5em;
+    margin-left: .5em;
+
+    transform: rotate(90deg);
+}
+
+.folder-toggle-rotate {
+    transform: rotate(0deg) !important;
+}
+
+.folder-inner {
+    width: 100%;
+    display: flex;
+    flex-direction: column
+}
+
+.folder-inner > * {
+    width: 100%;
+    padding-left: 15%;
+}
+
+.folder-hidden {
+    display: none;
+}
+
+.project-link {
+    padding-top: .25em;
+    padding-bottom: .25em;
+}
+
+.folder-header:hover , .project-link:hover {
+    cursor: pointer;
+    background-color: var(--color-3);
+}
+
+.folder-header:active, .project-link:active {
+    background-color: rgba(10, 70, 172, 0.6);
+}
+
+/* ---- MAIN CONTENT AND TABS ---- */
+#welcome-section {
+    position: absolute;
+    top: 0;
+
+    height: 100vh;
+    width: 80%;
+
+    left: 20%;
+    background-color: #111;
+}
+
+@media (max-width: 1500px) {
+    #welcome-section {
+        left: var(--sidebar-min-width);
+        width: calc(100% - var(--sidebar-min-width));
+    }
+}
+
+/* AT LESS THAN 900PX: SIDEBAR IS COLLAPSIBLE */
+@media (max-width: 900px) {
+    #welcome-section {
+        left: 40px;
+        width: calc(100% - 40px);
+    }
+    #explorer-sidebar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #explorer {
+        display: none;
+    }
+}
+

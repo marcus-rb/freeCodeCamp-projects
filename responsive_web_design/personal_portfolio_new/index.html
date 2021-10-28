@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Marcus Benrud</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="icon" type="image/svg" href="image_files/mb_logo.svg">
+        <meta name="viewport" content="width = device-width, initial-scale=1">
+    </head>
+    <body>
+        <div id="explorer">
+            <div id="explorer-open-editors">
+
+            </div>
+            <div id="explorer-folder" class="folder">
+                
+                <div class="folder-header" onclick="toggle_folder(this.parentNode);">
+                    <img class="folder-toggle"  src="image_files/collapse.svg">
+                    <p>marcus_benrud</p>
+                </div>
+                <div class="folder-inner">
+                    <div id="about" class="folder">
+
+                        <div class="folder-header" onclick="toggle_folder(this.parentNode);">
+                            <img class="folder-toggle" src="image_files/collapse.svg">
+                            <p>about</p>
+                        </div>
+
+                        <div class="folder-inner">
+                            <a class="project-link">whatIUse.mb</a>
+                            <a class="project-link">other.mb</a>
+                        </div>
+                    </div>
+    
+                    <div id="projects" class="folder">
+    
+                        <div class="folder-header" onclick="toggle_folder(this.parentNode);"> 
+                            <img class="folder-toggle" src="image_files/collapse.svg">
+                            <p>projects</p>
+                        </div>
+
+                        <div class="folder-inner">
+                            <a class="project-link">freeCodeCamp.mb</a>
+                            <a class="project-link">cplusplus.mb</a>
+                            <a class="project-link">blender3d.mb</a>
+                        </div>
+                        
+    
+                    </div>
+    
+                    <a class="project-link">contact.mb</a>
+                </div>
+
+
+            </div>
+        </div>
+        <div id="explorer-sidebar" onclick="toggle_explorer();">
+            &gt;
+        </div>
+        <div id="welcome-section" class="tab">
+            <nav id="navbar"></nav>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae ligula scelerisque, fringilla quam vitae, placerat nulla. Nam ac bibendum ante, eu blandit odio. Sed tincidunt fringilla nisi nec ornare. Integer euismod mauris nec pretium tincidunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent auctor eleifend mi in pharetra. Morbi a nisi urna. Pellentesque efficitur pellentesque tellus, sed euismod ligula imperdiet in. In sed lacus auctor, pharetra ex sit amet, auctor sapien. Vivamus molestie sit amet tellus vel imperdiet. Mauris sodales metus eu interdum faucibus. Aliquam ullamcorper lacus vel enim feugiat efficitur. Nullam dignissim massa id ultrices volutpat. Aliquam volutpat cursus est, vel pulvinar nulla tempor fringilla. </p>
+        </div>
+    </body>
+    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</html>
