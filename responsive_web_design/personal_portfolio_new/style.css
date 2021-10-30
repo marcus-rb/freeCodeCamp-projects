@@ -242,7 +242,6 @@ nav {
 }
 
 .nav-link-view {
-    display: inline-block;
     font-style: italic;
 }
 
@@ -270,6 +269,11 @@ nav {
 
 .nav-in-focus {
     background-color: var(--body-background-color);
+}
+
+.nav-in-focus > .close-btn {
+    visibility: visible !important;
+    font-style: normal !important;
 }
 
 /* TABS */
