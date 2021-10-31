@@ -44,13 +44,14 @@ const tab_order = {
         for (const tab of document.getElementsByClassName("nav-link-active")) {
             if (tab.classList.contains("nav-link-view")) return parseInt(tab.style.order);
         }
-        return undefined;
+        return 0;
     }
 }
 
 const update_tab_order = () => {
-    let order = 0;
+    let order = 1;
     for (const link of document.getElementsByClassName("nav-link")) {
+        link.style.order = "unset";
         if(link.classList.contains("nav-link-active")) {
             link.style.order = order;
             order++;
@@ -62,7 +63,9 @@ const update_tab_order = () => {
 const project_link = (innerHTML) => {
     const elem = document.createElement("a");
     elem.classList.add("project-link");
+    elem.classList.add("open-link");
     elem.innerHTML = '<img class="file-img" src="image_files/mb_logo.svg"></img>' + innerHTML;
+    elem.addEventListener("click", () => {focus_tab(innerHTML);});
 
     return elem;
 }
@@ -97,6 +100,7 @@ const open_tab = (tab_id) => {
     if (tab_link.classList.contains("nav-link-active")) return;
 
     tab_link.classList.toggle("nav-link-active");
+    tab_link.style.order = tab_order.get_tab_amount();
 }
  
 // close a tab
@@ -112,9 +116,22 @@ const close_tab = (tab_id) => {
     tab_link.classList.contains("nav-link-view") ? tab_link.classList.toggle("nav-link-view") : null ;
 
     update_tab_order();
+
+
+    // remove link from "open tabs" section. Display "nothing here yet" if no more links are present
+    for (const link of document.getElementById("open-tabs-inner").children) {
+        if (link.textContent == tab_link.id.slice(0,-5)) {
+            document.getElementById("open-tabs-inner").removeChild(link);
+            if (!document.getElementsByClassName("open-link").length) 
+                document.getElementById("placeholder-open-tabs").style.display = "unset";
+        }
+            
+    }
+
     // temp next open tab
     for (const open_tab of document.getElementsByClassName("nav-link-active")) {
         focus_tab(open_tab.id.slice(0,-5));
+
         return;
     }
 
@@ -136,14 +153,6 @@ const view_tab = (tab_id) => {
     // if already in view - do nothing
     if (tab_link.classList.contains("nav-link-view")) return;
 
-    if (tab_order.get_temp_tab_number() === undefined) {
-        console.log("push temp tab to the back!");
-        tab_link.style.order = tab_order.get_tab_amount() + 1;
-    } else {
-        console.log("replace temp tab!");
-        tab_link.style.order = tab_order.get_temp_tab_number();
-    }
-
     // close other temporary open tabs:
     if (document.getElementsByClassName("nav-link-view").length) {
         close_tab(
@@ -163,7 +172,6 @@ const activate_tab = (tab_id) => {
 
     open_tab(tab_id);
 
-    tab_link.style.order = tab_order.get_tab_amount() + 1;
     document.getElementById("placeholder-open-tabs").style.display = "none";
     document.getElementById("open-tabs-inner").appendChild(project_link(tab_id));
 
