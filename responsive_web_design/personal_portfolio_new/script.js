@@ -170,14 +170,15 @@ const view_tab = (tab_id) => {
 const activate_tab = (tab_id) => {
     const tab_link = document.getElementById(tab_id + "-link");
 
-    open_tab(tab_id);
-
     document.getElementById("placeholder-open-tabs").style.display = "none";
-    document.getElementById("open-tabs-inner").appendChild(project_link(tab_id));
 
+    if (tab_link.classList.contains("nav-link-view")) {
+        document.getElementById("open-tabs-inner").appendChild(project_link(tab_id));
+    }
+
+    open_tab(tab_id);
+    
     focus_tab(tab_id);
-
-
 
     if (tab_link.classList.contains("nav-link-view")) {
         tab_link.classList.toggle("nav-link-view");
