@@ -172,12 +172,22 @@ const activate_tab = (tab_id) => {
 
     open_tab(tab_id);
 
+    
     document.getElementById("placeholder-open-tabs").style.display = "none";
-    document.getElementById("open-tabs-inner").appendChild(project_link(tab_id));
-
+    
+    // Don't add to active tabs list if already active
+    if (document.getElementsByClassName("open-link").length > 0) {
+        
+        for (const open_link of document.getElementsByClassName("open-link")) {
+            
+            if (tab_id == open_link.textContent) break;
+            document.getElementById("open-tabs-inner").appendChild(project_link(tab_id));
+        }
+    } else {
+        document.getElementById("open-tabs-inner").appendChild(project_link(tab_id));
+    }
+    
     focus_tab(tab_id);
-
-
 
     if (tab_link.classList.contains("nav-link-view")) {
         tab_link.classList.toggle("nav-link-view");
