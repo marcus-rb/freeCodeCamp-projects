@@ -87,7 +87,7 @@ body, div, nav, p, h1, h2, a, img {
     display: unset !important;
 }
 
-#explorer-open-editors, #explorer-folder {
+#explorer-open-editors, #explorer-files {
     border-bottom: 1px solid var(--color-3);
 }
 
@@ -100,9 +100,9 @@ body, div, nav, p, h1, h2, a, img {
 }
 
 .folder-header {
-    width: 110%;
-    margin-left: -10%;
-    padding-left: 10%;
+    width: 120%;
+    margin-left: -20%;
+    padding-left: 20%;
 
     padding-top: 0.25em;
     padding-bottom: 0.25em;
@@ -130,16 +130,16 @@ body, div, nav, p, h1, h2, a, img {
     transform: rotate(0deg) !important;
 }
 
-.folder-inner {
+.folder-content {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.folder-inner > * {
-    width: 110%;
-    padding-left: 20%;
-    margin-left: -10%;
+.folder-content > * {
+    width: 120%;
+    padding-left: 30%;
+    margin-left: -20%;
 }
 
 .folder-hidden {
@@ -161,6 +161,12 @@ body, div, nav, p, h1, h2, a, img {
 
 .folder-header:active, .project-link:active {
     background-color: rgba(10, 70, 172, 0.6);
+}
+
+#placeholder-open-tabs {
+    padding: unset;
+    margin: unset;
+    width: 100%;
 }
 
 /* ---- MAIN CONTENT AND TABS ---- */
@@ -221,6 +227,7 @@ body, div, nav, p, h1, h2, a, img {
     }
 }
 
+/* vv everything nav bar related vv */
 nav {
     height: auto;
     width: 100%;
@@ -244,7 +251,7 @@ nav {
     display: inline-block;
 }
 
-.nav-link-view {
+.nav-link-preview {
     font-style: italic;
 }
 
@@ -280,14 +287,6 @@ nav {
     visibility: visible !important;
 }
 
-/* TABS */
-.tab {
-    display: none;
-}
-
-.tab-view {
-    display: unset;
-}
 
 /* AT LESS THAN 900PX: SIDEBAR IS COLLAPSIBLE */
 @media (max-width: 900px) {
@@ -305,3 +304,122 @@ nav {
     }
 }
 
+/* tabs / page sections */
+.tab {
+    height: 100%;
+
+    font-size: 120%;
+
+    display: none !important;
+}
+
+.tab-view {
+    display: unset !important;
+}
+
+.tab-inner {
+    height: 100%;
+    padding: 1em;
+    margin: auto;
+    max-width: 80%;
+}
+
+.tab p {
+    margin: 0.3em;
+}
+
+.tab-inner a, .tab-inner a:visited {
+    color: white;
+}
+
+.tab-comment-text {
+    font-size: 90%;
+    color: gray;
+}
+
+.tab-error-text {
+    font-family: monospace;
+    display: inline-block;
+    background-color: white;
+    color: red;
+    padding: 1em;
+    border-radius: 0.5em;
+}
+
+/* contact page */
+#contact-inner {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#contact-inner p, h1 {
+    margin: 0.3em;
+    text-align: center;
+}
+
+#contact-banner /* img */ {
+    width: 30%;
+    min-width: 300px;
+    border-radius: 50%;
+}
+
+/* freeCodeCamp projects */
+#freecodecamp-inner {
+    margin: auto;
+    text-align: center;
+    width: 80%;
+    min-width: 340px;
+}
+
+@media (max-width: 730px) {
+    #freecodecamp-inner {
+        font-size: 80%;
+    }
+}
+
+@media (max-width: 500px) {
+    .hide-cue {
+        display: none;
+    }
+}
+
+
+
+/* other about me tab */
+#other\.mb {
+    overflow-x: hidden;
+}
+
+#other-inner {
+    height: 100%;
+}
+
+#other-intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+#other-json {
+    font-family: monospace;
+    border-radius: 30px;
+    padding: 1em;
+    overflow-x: auto;
+    width: calc(100% - 2em);
+    margin: auto;
+    background-color: var(--color-2);
+
+    display: none;
+}
+
+@media (max-width: 460px) {
+    #other-json {
+        font-size: 90%;
+    }
+}
