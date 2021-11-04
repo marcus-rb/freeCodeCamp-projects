@@ -1,4 +1,4 @@
-
+"use strict";
 // Sidebar functionality
 
 const toggle_explorer = () => {
@@ -65,23 +65,6 @@ function reveal_json() {
  * .nav-link-preview - the tab is temporarily open
  */ 
 
-const tab_order_interface = {
-    get_tab_amount: function() {
-        return document.getElementsByClassName("nav-link-active").length;
-    },
-    refresh_tab_order: function() {
-        let order = 1;
-        for (const link of document.getElementsByClassName("nav-link")) {
-            link.style.order = "unset";
-            if(link.classList.contains("nav-link-active")) {
-                link.style.order = order;
-                order++;
-            }
-        }
-    },
-    current_open_index: null
-};
-
 // Get a link corresponding to a tab
 const project_link = (innerHTML) => {
     const link = document.createElement("a");
@@ -93,143 +76,114 @@ const project_link = (innerHTML) => {
     return link;
 }
 
-// - Focus on a tab on the dock -
-function focus_tab(tab_id)  {
 
-    // if tab is being closed do not focus 
-    // (clicking close also triggers the onclick for the element below it, which triggers focus)
-    if (!document.getElementById(tab_id+"-link").classList.contains("nav-link-active")) return;
+const get_tab_id = navlink_id => navlink_id.slice(0,-5);
+const tab_navlink = tab_id => document.getElementById(tab_id + "-link");
 
-    for (const tab of document.getElementsByClassName("tab-view")) {
-        tab.classList.remove("tab-view");
+class tab_interface {
+    static active_tabs = [];
+    static tab_in_preview = "";
+    static tab_in_focus = "";
+    
+    static is_active = tab_id => this.active_tabs.indexOf(tab_id) > -1;
+    static is_in_focus = tab_id => this.tab_in_focus == tab_id;
+    static is_in_preview = tab_id => this.tab_in_preview == tab_id;
+    static dock_previewed() {
+        document.getElementById(this.tab_in_preview + "-link").classList.remove("nav-link-preview");
+        this.tab_in_preview = "";
     }
-
-    for (const tab_navlink of document.getElementsByClassName("nav-in-focus")) {
-        tab_navlink.classList.remove("nav-in-focus");
+    static un_focus() {
+        document.getElementById(this.tab_in_focus).classList.remove("tab-view");
+        tab_navlink(this.tab_in_focus).classList.remove("nav-in-focus");
+        this.tab_in_focus = "";
     }
-
-    document.getElementById(tab_id + "-link").classList.add("nav-in-focus");
-    document.getElementById(tab_id).classList.add("tab-view");
+    static refresh_tab_order() {
+        this.active_tabs.forEach(elem => {
+            tab_navlink(elem).style.order = this.active_tabs.indexOf(elem);
+        })
+    }
 }
 
-// - Add tab to dock -
-function dock_tab(tab_id) {
-    const tab_navlink = document.getElementById(tab_id + "-link");
+const TI = tab_interface;
 
-    if (document.getElementsByClassName("nav-link-active").length == 0) 
+function dock_tab(tab_id) {
+    const navbar_link = tab_navlink(tab_id);
+
+    if (TI.active_tabs.length == 0) 
         document.getElementById("welcome-inner").style.display = "none";
 
-    // if already open do nothing
-    if (tab_navlink.classList.contains("nav-link-active")) return;
+    TI.active_tabs.push(tab_id);
 
-    tab_navlink.classList.add("nav-link-active");
-    tab_navlink.style.order = tab_order_interface.get_tab_amount();
-}
- 
-// - Close tab and remove from dock -
-function close_tab(tab_id, switching_preview_tab = false) {
-    const tab = document.getElementById(tab_id);
-    const tab_navlink = document.getElementById(tab_id + "-link");
-    const next_dock_tab = tab_navlink.style.order - 1;
-
-    // remove view class from tab if in focus
-    if (tab_navlink.classList.contains("nav-in-focus"))
-        tab.classList.remove("tab-view");
-
-    tab_navlink.classList.remove("nav-link-active");
-    if (switching_preview_tab) {
-        tab_navlink.style.order = "unset";
-        tab_navlink.classList.remove("nav-link-preview");
-    } else {
-        tab_navlink.classList.contains("nav-link-preview") ? tab_navlink.classList.remove("nav-link-preview") : null ;
-        tab_order_interface.refresh_tab_order();
-    }
-
-    
-
-    if (!switching_preview_tab) {
-        tab_order_interface.refresh_tab_order();
-    } else { tab_navlink.style.order = "unset"; }
-
-    // remove link from "open tabs" section. Display "nothing here yet" if no more links are present
-    for (const link of document.getElementById("open-tabs-inner").children) {
-        if (link.textContent == tab_navlink.id.slice(0,-5)) {
-            document.getElementById("open-tabs-inner").removeChild(link);   
-        }
-    }
-    if (!document.getElementsByClassName("open-link").length) 
-        document.getElementById("placeholder-open-tabs").style.display = "unset";
-
-    
-    // focus on next tab left until there are noe more tabs to open
-    const active_tab_navlinks = document.getElementsByClassName("nav-link-active");
-
-    if (next_dock_tab) {
-        active_tab_navlinks.forEach((link)=>{
-
-            if (link.style.order == next_dock_tab) {
-                focus_tab(link.id.slice(0,-5));
-                return;
-            }
-        });
-    } else if (next_dock_tab == 0) {
-        if (active_tab_navlinks.length) {
-            active_tab_navlinks.forEach((link) => {
-                if (link.style.order == 1) {
-                    focus_tab(link.id.slice(0,-5));
-                    return;
-                }
-            })
-        } else {
-            document.getElementById("welcome-inner").style.display = "flex";
-        }
-    }
+    navbar_link.style.order = TI.active_tabs.indexOf(tab_id);
+    navbar_link.classList.add("nav-link-active");
 }
 
-// - Open and dock tab, but add flag(.nav-link-preview) so that next opened tab will replace this -
 function preview_tab(tab_id) {
-    const tab_navlink = document.getElementById(tab_id + "-link");
-
-    // Already active? No need to open
-    if (tab_navlink.classList.contains("nav-link-active")) {
-        focus_tab(tab_id);
-        return;
-    }
-
-    // If another tab is temporarily open, close it
-    if (document.getElementsByClassName("nav-link-preview").length) {
-        close_tab(
-            document.getElementsByClassName("nav-link-preview")[0].id.slice(0,-5), true
-        );
-    }
-
     dock_tab(tab_id);
+    TI.tab_in_preview = tab_id;
+    
+    tab_navlink(tab_id).classList.add("nav-link-preview");
+
     focus_tab(tab_id);
- 
-    tab_navlink.classList.add("nav-link-preview");
 }
 
-// View and dock tab
-function activate_tab(tab_id) {
-    const tab_navlink = document.getElementById(tab_id + "-link");
-
-    // if tab is already active, do nothing
-    if (tab_navlink.classList.contains("nav-link-active") && !tab_navlink.classList.contains("nav-link-preview")) {
-        return;
+function close_tab(tab_id) {
+    if (TI.is_in_preview(tab_id)) {
+        TI.dock_previewed();
+        return close_tab(tab_id);
     }
 
-    dock_tab(tab_id);
-    focus_tab(tab_id);
-    tab_navlink.classList.remove("nav-link-preview");
+    if (TI.is_in_focus(tab_id)) TI.un_focus();
 
-    // controlling the "Active tabs" section in the explorer
-    document.getElementById("placeholder-open-tabs").style.display = "none";
-    document.getElementById("open-tabs-inner").appendChild(project_link(tab_id));
+    const current_index = TI.active_tabs.indexOf(tab_id);
+
+    tab_navlink(tab_id).classList.remove("nav-link-active");
+    TI.active_tabs.splice(current_index,1);
+    TI.refresh_tab_order();
+
+    // Focus on left tab until there are no more tab
+    if (current_index > 0) {
+        focus_tab(TI.active_tabs[current_index - 1]);
+    } else if (current_index == 0) {
+        TI.active_tabs.length ? focus_tab(TI.active_tabs[0]) : document.getElementById("welcome-inner").style.display = "flex";
+        focus_tab(TI.active_tabs[0]);
+    }
+}
+
+function focus_tab(tab_id) {
+
+    // Prevent focus call when closing the tab as close button click also entails navlink click
+    if (!TI.is_active(tab_id)) return;
+
+    if (TI.tab_in_focus.length > 0) 
+        if (TI.tab_in_focus == tab_id) {
+            return;
+        } else { TI.un_focus(); }
+
+    tab_navlink(tab_id).classList.add("nav-in-focus");
+    document.getElementById(tab_id).classList.add("tab-view");
+    TI.tab_in_focus = tab_id;
+}
+
+function select_tab_action(tab_id, preview_request) {
+    if (preview_request) {
+        if (TI.is_active(tab_id)) {
+            TI.is_in_focus(tab_id) ? null : focus_tab(tab_id);
+        } else {
+            if (TI.tab_in_preview.length)
+                close_tab(TI.tab_in_preview);
+            preview_tab(tab_id);
+        }
+    } else {
+        TI.is_in_preview(tab_id) ? TI.dock_previewed() : null ;
+    }
 }
 
 const toggle_close_tab_button = (elem)  => {
     elem.children[0].classList.toggle("visible");
 }
+
+
 
 // --- END OF TABS SECTION ---
 
@@ -250,13 +204,14 @@ window.onload = () => {
         navlink.addEventListener("mouseleave", () => {
             toggle_close_tab_button(navlink);
         })
+
         navlink.addEventListener("click", () => {
             if (navlink.classList.contains("nav-in-focus")) return;
-            focus_tab(navlink.id.slice(0,-5));
+            focus_tab(get_tab_id(navlink.id));
         })
 
         navlink.children[0].addEventListener("click", () => {
-            close_tab(navlink.id.slice(0, -5));
+            close_tab(get_tab_id(navlink.id));
         })
     }
 
@@ -264,10 +219,10 @@ window.onload = () => {
     for (const tab_projectlink of document.getElementsByClassName("project-link")) {
         
         tab_projectlink.addEventListener("click", () => {
-            preview_tab(tab_projectlink.textContent);
+            select_tab_action(tab_projectlink.textContent, true);
         })
         tab_projectlink.addEventListener("dblclick", () => {
-            activate_tab(tab_projectlink.textContent);
+             select_tab_action(tab_projectlink.textContent, false);
         })
     }
 }
