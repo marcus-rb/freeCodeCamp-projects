@@ -1,5 +1,5 @@
-console.log("script initialized..")
 
+// Sidebar functionality
 
 const toggle_explorer = () => {
     const explorer = document.getElementById("explorer");
@@ -16,8 +16,8 @@ const toggle_explorer = () => {
     }
 }
 
-let toggle_folder = (node) => {
-    for (const child of node.children) {
+let toggle_folder = (folder_elem) => {
+    for (const child of folder_elem.children) {
 
         if (!child.classList.contains("folder-header")) {
             
@@ -31,208 +31,243 @@ let toggle_folder = (node) => {
     }
 }
 
+// \about\other.mb page related
+function syntax_highlight_json_page() {
+    const target_element = document.querySelector("#other-json");
+
+    const string_pattern = /".*?"/g;
+    const number_pattern = /\d+/g;
+
+    let html_str = target_element.innerHTML;
+    
+    target_element.innerHTML.match(number_pattern).forEach((match)=>{
+        html_str = html_str.replace(match, `<span style="color: #51c97b;">${match}</span>`);
+    })
+    target_element.innerHTML.match(string_pattern).forEach((match) => {
+        html_str = html_str.replace(match, `<span style="color: #d46371;">${match}</span>`);
+    });
+
+    target_element.innerHTML = html_str;
+}
+
+function reveal_json() {
+    syntax_highlight_json_page();
+
+    document.getElementById("other-intro").style.display = "none";
+    document.getElementById("other-json").style.display = "block";
+}
+
 
 // TAB SYSTEM
+/* 
+ * .nav-link-active - the tab is present on the navbar
+ * .nav-link-focus - the tab is currently the open tab / tab in view
+ * .nav-link-preview - the tab is temporarily open
+ */ 
 
-const tab_order = {
-    get_tab_amount: () => {
-        // how many tabs are open?
+const tab_order_interface = {
+    get_tab_amount: function() {
         return document.getElementsByClassName("nav-link-active").length;
     },
-    get_temp_tab_number: () => {
-
-        for (const tab of document.getElementsByClassName("nav-link-active")) {
-            if (tab.classList.contains("nav-link-view")) return parseInt(tab.style.order);
+    refresh_tab_order: function() {
+        let order = 1;
+        for (const link of document.getElementsByClassName("nav-link")) {
+            link.style.order = "unset";
+            if(link.classList.contains("nav-link-active")) {
+                link.style.order = order;
+                order++;
+            }
         }
-        return 0;
-    }
-}
+    },
+    current_open_index: null
+};
 
-const update_tab_order = () => {
-    let order = 1;
-    for (const link of document.getElementsByClassName("nav-link")) {
-        link.style.order = "unset";
-        if(link.classList.contains("nav-link-active")) {
-            link.style.order = order;
-            order++;
-        }
-    }
-}
-
-// returns a project link, for use in open tabs view
+// Get a link corresponding to a tab
 const project_link = (innerHTML) => {
-    const elem = document.createElement("a");
-    elem.classList.add("project-link");
-    elem.classList.add("open-link");
-    elem.innerHTML = '<img class="file-img" src="image_files/mb_logo.svg"></img>' + innerHTML;
-    elem.addEventListener("click", () => {focus_tab(innerHTML);});
+    const link = document.createElement("a");
+    link.classList.add("project-link");
+    link.classList.add("open-link");
+    link.innerHTML = '<img class="file-img" src="image_files/mb_logo.svg"></img>' + innerHTML;
+    link.addEventListener("click", () => {focus_tab(innerHTML);});
 
-    return elem;
+    return link;
 }
 
-// focus on open tab
-const focus_tab = (tab_id) => {
+// - Focus on a tab on the dock -
+function focus_tab(tab_id)  {
 
-    // if tab is being closed do not focus
+    // if tab is being closed do not focus 
+    // (clicking close also triggers the onclick for the element below it, which triggers focus)
     if (!document.getElementById(tab_id+"-link").classList.contains("nav-link-active")) return;
 
     for (const tab of document.getElementsByClassName("tab-view")) {
-        tab.classList.toggle("tab-view");
+        tab.classList.remove("tab-view");
     }
 
-    for (const tab_link of document.getElementsByClassName("nav-in-focus")) {
-        tab_link.classList.toggle("nav-in-focus");
+    for (const tab_navlink of document.getElementsByClassName("nav-in-focus")) {
+        tab_navlink.classList.remove("nav-in-focus");
     }
 
-    document.getElementById(tab_id + "-link").classList.toggle("nav-in-focus");
-    document.getElementById(tab_id).classList.toggle("tab-view");
+    document.getElementById(tab_id + "-link").classList.add("nav-in-focus");
+    document.getElementById(tab_id).classList.add("tab-view");
 }
 
-// open a tab
-const open_tab = (tab_id) => {
+// - Add tab to dock -
+function dock_tab(tab_id) {
+    const tab_navlink = document.getElementById(tab_id + "-link");
 
     if (document.getElementsByClassName("nav-link-active").length == 0) 
         document.getElementById("welcome-inner").style.display = "none";
 
-    const tab_link = document.getElementById(tab_id + "-link");
-
     // if already open do nothing
-    if (tab_link.classList.contains("nav-link-active")) return;
+    if (tab_navlink.classList.contains("nav-link-active")) return;
 
-    tab_link.classList.toggle("nav-link-active");
-    tab_link.style.order = tab_order.get_tab_amount();
+    tab_navlink.classList.add("nav-link-active");
+    tab_navlink.style.order = tab_order_interface.get_tab_amount();
 }
  
-// close a tab
-const close_tab = (tab_id) => {
+// - Close tab and remove from dock -
+function close_tab(tab_id, switching_preview_tab = false) {
     const tab = document.getElementById(tab_id);
-    const tab_link = document.getElementById(tab_id + "-link");
+    const tab_navlink = document.getElementById(tab_id + "-link");
+    const next_dock_tab = tab_navlink.style.order - 1;
 
     // remove view class from tab if in focus
-    if (tab_link.classList.contains("nav-in-focus"))
-        tab.classList.toggle("tab-view");
+    if (tab_navlink.classList.contains("nav-in-focus"))
+        tab.classList.remove("tab-view");
 
-    tab_link.classList.toggle("nav-link-active");
-    tab_link.classList.contains("nav-link-view") ? tab_link.classList.toggle("nav-link-view") : null ;
+    tab_navlink.classList.remove("nav-link-active");
+    if (switching_preview_tab) {
+        tab_navlink.style.order = "unset";
+        tab_navlink.classList.remove("nav-link-preview");
+    } else {
+        tab_navlink.classList.contains("nav-link-preview") ? tab_navlink.classList.remove("nav-link-preview") : null ;
+        tab_order_interface.refresh_tab_order();
+    }
 
-    update_tab_order();
+    
 
+    if (!switching_preview_tab) {
+        tab_order_interface.refresh_tab_order();
+    } else { tab_navlink.style.order = "unset"; }
 
     // remove link from "open tabs" section. Display "nothing here yet" if no more links are present
     for (const link of document.getElementById("open-tabs-inner").children) {
-        if (link.textContent == tab_link.id.slice(0,-5)) {
-            document.getElementById("open-tabs-inner").removeChild(link);
-            if (!document.getElementsByClassName("open-link").length) 
-                document.getElementById("placeholder-open-tabs").style.display = "unset";
+        if (link.textContent == tab_navlink.id.slice(0,-5)) {
+            document.getElementById("open-tabs-inner").removeChild(link);   
         }
-            
     }
+    if (!document.getElementsByClassName("open-link").length) 
+        document.getElementById("placeholder-open-tabs").style.display = "unset";
 
-    // temp next open tab
-    for (const open_tab of document.getElementsByClassName("nav-link-active")) {
-        focus_tab(open_tab.id.slice(0,-5));
+    
+    // focus on next tab left until there are noe more tabs to open
+    const active_tab_navlinks = document.getElementsByClassName("nav-link-active");
 
-        return;
+    if (next_dock_tab) {
+        active_tab_navlinks.forEach((link)=>{
+
+            if (link.style.order == next_dock_tab) {
+                focus_tab(link.id.slice(0,-5));
+                return;
+            }
+        });
+    } else if (next_dock_tab == 0) {
+        if (active_tab_navlinks.length) {
+            active_tab_navlinks.forEach((link) => {
+                if (link.style.order == 1) {
+                    focus_tab(link.id.slice(0,-5));
+                    return;
+                }
+            })
+        } else {
+            document.getElementById("welcome-inner").style.display = "flex";
+        }
     }
-
-    // no more tabs: re-render welcome:
-    document.getElementById("welcome-inner").style.display = "flex";
 }
 
-// view a tab without docking 
-const view_tab = (tab_id) => {
-    
-    const tab_link = document.getElementById(tab_id + "-link");
+// - Open and dock tab, but add flag(.nav-link-preview) so that next opened tab will replace this -
+function preview_tab(tab_id) {
+    const tab_navlink = document.getElementById(tab_id + "-link");
 
-    // if open - change
-    if (tab_link.classList.contains("nav-link-active")) {
+    // Already active? No need to open
+    if (tab_navlink.classList.contains("nav-link-active")) {
         focus_tab(tab_id);
         return;
     }
 
-    // if already in view - do nothing
-    if (tab_link.classList.contains("nav-link-view")) return;
-
-    // close other temporary open tabs:
-    if (document.getElementsByClassName("nav-link-view").length) {
+    // If another tab is temporarily open, close it
+    if (document.getElementsByClassName("nav-link-preview").length) {
         close_tab(
-            document.getElementsByClassName("nav-link-view")[0].id.slice(0,-5)
+            document.getElementsByClassName("nav-link-preview")[0].id.slice(0,-5), true
         );
     }
 
-    open_tab(tab_id);
+    dock_tab(tab_id);
     focus_tab(tab_id);
  
-    tab_link.classList.toggle("nav-link-view");
+    tab_navlink.classList.add("nav-link-preview");
 }
 
-// add a tab to dock, and focus
-const activate_tab = (tab_id) => {
-    const tab_link = document.getElementById(tab_id + "-link");
+// View and dock tab
+function activate_tab(tab_id) {
+    const tab_navlink = document.getElementById(tab_id + "-link");
 
-    document.getElementById("placeholder-open-tabs").style.display = "none";
-
-    if (tab_link.classList.contains("nav-link-view")) {
-        document.getElementById("open-tabs-inner").appendChild(project_link(tab_id));
+    // if tab is already active, do nothing
+    if (tab_navlink.classList.contains("nav-link-active") && !tab_navlink.classList.contains("nav-link-preview")) {
+        return;
     }
 
-    open_tab(tab_id);
-    
+    dock_tab(tab_id);
     focus_tab(tab_id);
+    tab_navlink.classList.remove("nav-link-preview");
 
-    if (tab_link.classList.contains("nav-link-view")) {
-        tab_link.classList.toggle("nav-link-view");
-    }
+    // controlling the "Active tabs" section in the explorer
+    document.getElementById("placeholder-open-tabs").style.display = "none";
+    document.getElementById("open-tabs-inner").appendChild(project_link(tab_id));
 }
 
-// changing visibility of close button
-const toggle_close_tab = (elem)  => {
+const toggle_close_tab_button = (elem)  => {
     elem.children[0].classList.toggle("visible");
 }
 
-// on page load
+// --- END OF TABS SECTION ---
+
 window.onload = () => {
 
-    // collapse all folders
+    // collapse all explorer folders
     toggle_folder(document.getElementById("explorer-open-editors"));
-    toggle_folder(document.getElementById("explorer-folder"));
+    toggle_folder(document.getElementById("explorer-files"));
     toggle_folder(document.getElementById("about"));
     toggle_folder(document.getElementById("projects"));
 
 
-    // visible on hover for navlink cross out
+    // navbar link functionality
     for (const navlink of document.getElementsByClassName("nav-link")) {
         navlink.addEventListener("mouseenter", () => {
-            //console.log("mouse enter");
-            toggle_close_tab(navlink);
+            toggle_close_tab_button(navlink);
         })
         navlink.addEventListener("mouseleave", () => {
-            toggle_close_tab(navlink);
+            toggle_close_tab_button(navlink);
         })
-
-        // close tab when pressing x
-        navlink.children[0].addEventListener("click", () => {
-            close_tab(navlink.id.slice(0, -5));
-        })
-
-        // focus to a tab if link open
         navlink.addEventListener("click", () => {
             if (navlink.classList.contains("nav-in-focus")) return;
             focus_tab(navlink.id.slice(0,-5));
         })
+
+        navlink.children[0].addEventListener("click", () => {
+            close_tab(navlink.id.slice(0, -5));
+        })
     }
 
-    // view tab on single click
-    // activate tab on double click
-    for (const tablink of document.getElementsByClassName("project-link")) {
+    // explorer link functionality
+    for (const tab_projectlink of document.getElementsByClassName("project-link")) {
         
-        tablink.addEventListener("click", () => {
-            if (tablink.classList.contains("nav-link-view")) return;
-            view_tab(tablink.textContent);
+        tab_projectlink.addEventListener("click", () => {
+            preview_tab(tab_projectlink.textContent);
         })
-        tablink.addEventListener("dblclick", () => {
-            if (tablink.classList.contains("nav-link-active")) return;
-            activate_tab(tablink.textContent);
+        tab_projectlink.addEventListener("dblclick", () => {
+            activate_tab(tab_projectlink.textContent);
         })
     }
 }
