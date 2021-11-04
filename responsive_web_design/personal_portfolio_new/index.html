@@ -9,22 +9,22 @@
     <body>
         <div id="explorer">
             <h2>Explorer</h2>
-            <div id="explorer-open-editors" class="folder">
+            <section id="explorer-open-editors" class="folder">
                 <div class="folder-header" onclick="toggle_folder(this.parentNode)">
                     <img class="folder-toggle" src="image_files/collapse.svg">
                     <p>Active tabs</p>
                 </div>
-                <div class="folder-inner" id="open-tabs-inner">
+                <div class="folder-content" id="open-tabs-inner">
                     <p id="placeholder-open-tabs" style="padding: .5em; color: gray; text-align: center;">Nothing here yet</p>
                 </div>
-            </div>
-            <div id="explorer-folder" class="folder">
+            </section>
+            <section id="explorer-files" class="folder">
                 
                 <div class="folder-header" onclick="toggle_folder(this.parentNode);">
                     <img class="folder-toggle"  src="image_files/collapse.svg">
                     <p>marcus_benrud</p>
                 </div>
-                <div class="folder-inner">
+                <div class="folder-content">
                     <div id="about" class="folder">
 
                         <div class="folder-header" onclick="toggle_folder(this.parentNode);">
@@ -32,7 +32,7 @@
                             <p>about</p>
                         </div>
 
-                        <div class="folder-inner">
+                        <div class="folder-content">
                             <a class="project-link"><img class="file-img" src="image_files/mb_logo.svg">whatIUse.mb</a>
                             <a class="project-link"><img class="file-img" src="image_files/mb_logo.svg">other.mb</a>
                         </div>
@@ -45,7 +45,7 @@
                             <p>projects</p>
                         </div>
 
-                        <div class="folder-inner">
+                        <div class="folder-content">
                             <a class="project-link"><img class="file-img" src="image_files/mb_logo.svg">freeCodeCamp.mb</a>
                             <a class="project-link"><img class="file-img" src="image_files/mb_logo.svg">cplusplus.mb</a>
                             <a class="project-link"><img class="file-img" src="image_files/mb_logo.svg">blender3d.mb</a>
@@ -58,12 +58,13 @@
                 </div>
 
 
-            </div>
+            </section>
         </div>
         <div id="explorer-sidebar" onclick="toggle_explorer();">
             &gt;
         </div>
-        <div id="welcome-section" class="tab">
+        <main id="welcome-section">
+            
             <nav id="navbar">
                 <a class="nav-link" id="whatIUse.mb-link">
                     whatIUse.mb<span class="close-btn">&#x2715;</span>
@@ -75,19 +76,74 @@
                 <a class="nav-link" id="contact.mb-link">contact.mb<span class="close-btn">&#x2715;</span></a>
                 <a href="#welcome-inner" id="dud-2" style="display: none;"></a><!-- for freeCodeCamp test-->
             </nav>
+
+            <!-- placeholder welcome page / background -->
             <div id="welcome-inner">
                 <img id="welcome-img" src="image_files/portrait.jpg">
                 <h1>Welcome!</h1>
                 <p>I'm Marcus, a software developer based in Oslo, Norway. Here you can learn more about me and what I do.</p>
-                <p style="font-size: 90%; color: gray;">You haven't opened any tabs yet, start navigating using the explorer.</p>
+                <p style="font-size: 90%; color: gray;">You haven't opened any tabs yet, start navigating using the explorer.
+                <br>Click once to view, double click to dock.</p>
             </div>
-            <div class="tab" id="whatIUse.mb">tab 1</div>
-            <div class="tab" id="other.mb">tab 2</div>
-            <div class="tab" id="freeCodeCamp.mb">tab 3</div>
-            <div class="tab" id="cplusplus.mb">tab 4</div>
-            <div class="tab" id="blender3d.mb">tab 5</div>
-            <div class="tab" id="contact.mb">tab 6</div>
-        </div>
+
+            <!-- vv main content pages vv -->
+            <section class="tab" id="whatIUse.mb">tab 1</section>
+
+            <section class="tab" id="other.mb">
+                <div id="other-inner">
+                    <div id="other-intro">
+                        <h1>Oops!</h1>
+                        <p>This file is not properly formatted!</p>
+                        <p class="tab-error-text">Expected to match: <code>'.mb'</code><br>Got: <code>'.json'</code></p>
+                        <a href="#" onclick="reveal_json();" style="color: white">Open as <code>'.json'</code>?</a>
+                    </div>
+                    <div id="other-json">
+                        "marcus_benrud": {
+                        <pre>   "age": 21,</pre>
+                        <pre>   "location": {</pre>
+                        <pre>       "city": "Oslo",</pre>
+                        <pre>       "country": "Norway" },</pre>
+                        <pre>   "languages": {</pre>
+                        <pre>       "spoken": ["Norwegian", "English"],</pre>
+                        <pre>       "computer": ["JavaScript", "C++"]</pre>
+                        <pre>   }</pre>    
+                        }
+                    </div>
+                </div>
+            </section>
+
+            <section class="tab" id="freeCodeCamp.mb">
+                <div id="freecodecamp-inner">
+                    <h1><span class="hide-cue">My </span>freeCodeCamp<span class="hide-cue"> projects</span></h1>
+                    <p>I first started learning programming at this website, and greatly appreciate their education. I have earned the certifications
+                        <a href="https://www.freecodecamp.org/certification/marcus-rb/responsive-web-design" style="display: inline-block;" target="_blank">Responsive Web Design</a> and 
+                        <a href="https://www.freecodecamp.org/certification/marcus-rb/javascript-algorithms-and-data-structures" style="display: inline-block;" target="_blank">JavaScript Algorithms and Data Structures</a></p>
+                    <p>
+                        Recently I remade all the websites required for the former certification except for the portfolio page, which I instead made just how I wanted. Of course I have them listed here so you can view them. I'd encourage noticing
+                        the progression between each site.
+                    </p>
+                    <div id="freecodecamp-projects">
+                        
+                    </div>
+                </div>
+            </section>
+
+            <section class="tab" id="cplusplus.mb">tab 4</section>
+
+            <section class="tab" id="blender3d.mb">tab 5</section>
+
+            <section class="tab" id="contact.mb">
+                <div id="contact-inner" class="tab-inner">
+                    <img id="contact-banner" src="image_files/generic-image-placeholder.png">
+                    <h1>Contact me</h1>
+                    <p>If you'd like to get in touch you can send me an email at <a href="mailto:contact@marcusbenrud.com">contact@marcusbenrud.com</a></p>
+                    <p class="tab-comment-text">Don't know what to talk about? 
+                        View my <a href="https://github.com/marcus-rb" target="_blank">github</a>,
+                        <a href="https://freecodecamp.org/marcus-rb" target="_blank">freeCodeCamp profile</a>, or simply explore the sidebar.
+                    </p>
+                </div>
+            </section>
+        </main>
     </body>
     <script type="text/javascript" src="script.js"></script>
     <script type="text/javascript" src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
