@@ -1,0 +1,32 @@
+/* ----- GENERAL DOCUMENT SETUP SECTION ----- */
+
+/* --- global variables --- */
+:root {
+    --color-1: #111;
+    --color-2: #222;
+    --color-3: #333;
+    --color-4: #444;
+
+    --body-background-color: #171717;
+    --body-min-height: 500px;
+
+    --sidebar-default-width: 20%;
+    --sidebar-min-width: 300px;
+    --collapse-toggle-width: 50px;
+}
+
+html {
+    font-family: arial;
+    font-weight: 500;
+    color: white;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+body, div, nav, p, h1, h2, a, img {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
