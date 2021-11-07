@@ -11,6 +11,7 @@
     width: var(--sidebar-default-width);
     min-width: var(--sidebar-min-width);
 
+    overflow-y: auto;
     
     background-color: #202020;
 
