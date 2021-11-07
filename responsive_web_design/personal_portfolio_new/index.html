@@ -2,7 +2,10 @@
 <html>
     <head>
         <title>Marcus Benrud</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="stylesheets\general.css">
+        <link rel="stylesheet" type="text/css" href="stylesheets\explorer.css">
+        <link rel="stylesheet" type="text/css" href="stylesheets\nav_welcome.css">
+        <link rel="stylesheet" type="text/css" href="stylesheets\tabs.css">
         <link rel="icon" type="image/svg" href="image_files/mb_logo.svg">
         <meta name="viewport" content="width = device-width, initial-scale=1">
     </head>
@@ -130,7 +133,27 @@
 
             <section class="tab" id="cplusplus.mb">tab 4</section>
 
-            <section class="tab" id="blender3d.mb">tab 5</section>
+            <section class="tab" id="blender3d.mb">
+                <div id="blender-intro">
+                    <img id="blender-widescreen" src="image_files/blender3d/blender_background_wide.png">
+                    <img id="blender-portrait-top" class="blender-portrait" src="image_files/blender3d/blender_portrait_top.png">
+                    <img id="blender-title" src="image_files/blender3d/blender_title.PNG">
+                    <img id="blender-portrait-bottom" class="blender-portrait" src="image_files/blender3d/blender_portrait_bottom.png">
+                </div>
+                <div id="blender-inner">
+                    <div class="blender-content" id="blender-text-intro">
+                        <h1>Where it all started</h1>
+                        <p>Blender is the first tool I ever used in relation to software development. It started when I became interested in modding video games.</p>
+                        <p>In 2015-2016 I made several weapon packs for a game called Unturend, marking a significant upgrade in visual fidelity.
+                            I would argue it was well received, as the modpacks have received a total of over 1.1 million unique downloads,
+                            with an active player base peaking around <a href="https://steamcharts.com/app/304930" target="_blank">30,000 online players</a> each day.
+                        </p>
+                        <div id="blender-unturned-slideshow" class="slideshow blender-slideshow">
+                        </div>
+                    </div>
+
+                </div>
+            </section>
 
             <section class="tab" id="contact.mb">
                 <div id="contact-inner" class="tab-inner">
@@ -138,9 +161,10 @@
                     <h1>Contact me</h1>
                     <p>If you'd like to get in touch you can send me an email at <a href="mailto:contact@marcusbenrud.com">contact@marcusbenrud.com</a></p>
                     <p class="tab-comment-text">Don't know what to talk about? 
-                        View my <a href="https://github.com/marcus-rb" target="_blank">github</a>,
+                        View my <a href="https://github.com/marcus-rb" id="profile-link" target="_blank">github</a>, <!-- id of "profile-link" for freeCodeCamp testsuite-->
                         <a href="https://freecodecamp.org/marcus-rb" target="_blank">freeCodeCamp profile</a>, or simply explore the sidebar.
                     </p>
+                    
                 </div>
             </section>
         </main>
