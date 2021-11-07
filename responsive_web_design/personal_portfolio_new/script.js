@@ -57,6 +57,137 @@ function reveal_json() {
     document.getElementById("other-json").style.display = "block";
 }
 
+// \projects\blender3d.mb page related
+function apply_corner_dots() {
+    const elements = document.getElementsByClassName("blender-content");
+    const dot_array = ["bd-top bd-left", "bd-top bd-right", "bd-bottom bd-left", "bd-bottom bd-right"];
+
+    elements.forEach(elem => {
+        for (let i = 0; i < dot_array.length; i++) {
+            const dot = document.createElement("div");
+            dot.classList.add("blender-dot");
+            dot.className += " " + dot_array[i];
+            elem.append(dot);
+        }
+    })
+}
+
+class Slideshow {
+    constructor(name, image_links, text_inputs, urls = []) {
+        this.image_src = image_links;
+        this.text = text_inputs;
+        this.urls = urls;
+        this.state = {
+            index: 0,
+            image: null,
+            link: null,
+            render_obj: null,
+        };
+
+        this.internal_id = name;
+
+        this.generate = this.generate.bind(this);
+        this.render = this.render.bind(this);
+        this.load_next = this.load_next.bind(this);
+    }
+
+    load_next = () => {
+
+        this.state.index < this.image_src.length -1 ? this.state.index++ : this.state.index = 0;
+    }
+
+    load_previous = () => this.state.index > 0 ? this.state.index-- : this.state.index = this.image_src.length - 1;
+
+    generate() {
+        const link_ext = document.createElement("a");
+        const img_ext = document.createElement("div");
+        const img = document.createElement("img");
+
+        link_ext.innerHTML = this.text[this.state.index];
+        link_ext.setAttribute("target", "_blank");
+        link_ext.setAttribute("href", this.urls[this.state.index]);
+        link_ext.classList.add("slideshow-text");
+        link_ext.classList.add("slideshow-link");
+
+        img.setAttribute("src", "image_files\\blender3d\\" + this.image_src[this.state.index]);
+        img.classList.add("slideshow-image");
+        
+        img_ext.append(img);
+        img_ext.style.display = "flex";
+        img_ext.style.justifyContent = "center";
+        img_ext.style.flexDirection = "column";
+
+        this.state.image = img_ext;
+        this.state.link = link_ext;
+    }
+
+    #button(left = true) {
+        const button = document.createElement("a");
+        button.classList.add("slideshow-controls");
+
+        button.innerHTML = left ? "&lt;" : "&gt;";
+        if (left) {
+            button.style.left = "0";
+        } else {
+            button.style.right = "0";
+        }
+
+        return button;
+    }
+
+    re_render() {
+        const render_elem = this.state.render_obj;
+        const img = render_elem.children[0].children[0];
+        const text = render_elem.children[1];
+
+        img.setAttribute("src", "image_files\\blender3d\\" + this.image_src[this.state.index]);
+        text.innerHTML = this.text[this.state.index];
+    }
+
+    render(target) {
+        this.generate();
+
+        const button_left = this.#button(true);
+        const button_right = this.#button(false);
+        button_left.addEventListener("click", ()=>{
+            this.load_previous();
+            this.re_render();
+        })
+        button_right.addEventListener("click", ()=>{
+            this.load_next();
+            this.re_render();
+        })
+
+        if (target.getAttribute("data-slideshow-id") == this.internal_id) {
+            target.style.height = target.offsetHeight + "px";
+            target.innerHTML = "";
+        } else {
+            target.setAttribute("data-slideshow-id", this.internal_id);
+        }
+        this.state.image.append(button_left);
+        this.state.image.append(button_right);
+
+        target.append(this.state.image);
+        target.append(this.state.link);
+
+        target.style.height = "";
+
+        this.state.render_obj = target;
+    }
+}
+
+const unturned_img = ["unturned_rwp.jpg", "unturned_freedom.jpg", "uturned_bacon.jpg"]
+const unturned_text = [
+    "The first released pack. Initially 35 and later 39 weapons were included.",
+    "Second time around I shifted my focus more towards making fewer higher quality guns",
+    "The last one I released, now with even fewer guns, but with added custom accessories like optics and night vision"
+];
+const unturned_links= [
+    "https://steamcommunity.com/sharedfiles/filedetails/?id=491742834",
+    "https://steamcommunity.com/sharedfiles/filedetails/?id=529767203",
+    "https://steamcommunity.com/sharedfiles/filedetails/?id=650720137"
+];
+
 
 // TAB SYSTEM
 /* 
@@ -141,6 +272,16 @@ function close_tab(tab_id) {
     TI.active_tabs.splice(current_index,1);
     TI.refresh_tab_order();
 
+    link_manager: {
+        const active_links = document.getElementsByClassName("open-link");
+        for (const active_link of active_links) {
+            if (active_link.textContent == tab_id)
+                active_link.remove();
+        }
+        if (active_links.length == 0)
+            document.querySelector("#open-tabs-inner").children[0].style.display = "unset";
+    }
+
     // Focus on left tab until there are no more tab
     if (current_index > 0) {
         focus_tab(TI.active_tabs[current_index - 1]);
@@ -175,6 +316,13 @@ function select_tab_action(tab_id, preview_request) {
             preview_tab(tab_id);
         }
     } else {
+        if (TI.is_in_preview(tab_id)) {
+            const open_tabs_inner = document.querySelector("#open-tabs-inner");
+
+            TI.dock_previewed();
+            if (TI.active_tabs.length == 1 && !TI.tab_in_preview.length) open_tabs_inner.children[0].style.display = "none";
+            open_tabs_inner.append(project_link(tab_id));
+        }
         TI.is_in_preview(tab_id) ? TI.dock_previewed() : null ;
     }
 }
@@ -225,4 +373,9 @@ window.onload = () => {
              select_tab_action(tab_projectlink.textContent, false);
         })
     }
+
+    // apply corner dots on blender page'
+    apply_corner_dots();
+    const unturned_slideshow = new Slideshow("unturned", unturned_img, unturned_text, unturned_links);
+    unturned_slideshow.render(document.querySelector("#blender-unturned-slideshow"));
 }
