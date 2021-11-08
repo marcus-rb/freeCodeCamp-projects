@@ -1,7 +1,5 @@
 /* ---- MAIN CONTENT AND TABS ---- */
 #welcome-section {
-
-
     position: absolute;
     top: 0;
     z-index: 1;
@@ -60,6 +58,8 @@
 
 /* vv everything nav bar related vv */
 nav {
+    position: relative;
+
     height: auto;
     width: 100%;
     display: flex;
@@ -80,6 +80,7 @@ nav {
 
 .nav-link-active {
     display: inline-block;
+    z-index: 3;
 }
 
 .nav-link-preview {
@@ -112,12 +113,22 @@ nav {
 
 .nav-in-focus {
     background-color: var(--body-background-color);
+    z-index: 5;
 }
 
 .nav-in-focus > .close-btn {
     visibility: visible !important;
 }
 
+#nav-tab-bar {
+    position: absolute;
+    z-index: 4;
+    width: 100%;
+    height: .4em;
+    bottom: 0;
+    left: 0;
+    background-color: var(--body-background-color);
+}
 
 /* AT LESS THAN 900PX: SIDEBAR IS COLLAPSIBLE */
 @media (max-width: 900px) {
