@@ -104,10 +104,13 @@ class Slideshow {
         const img = document.createElement("img");
 
         link_ext.innerHTML = this.text[this.state.index];
-        link_ext.setAttribute("target", "_blank");
-        link_ext.setAttribute("href", this.urls[this.state.index]);
+
+        if (this.urls.length > 0) {
+            link_ext.setAttribute("target", "_blank");
+            link_ext.setAttribute("href", this.urls[this.state.index]);
+            link_ext.classList.add("slideshow-link");
+        }
         link_ext.classList.add("slideshow-text");
-        link_ext.classList.add("slideshow-link");
 
         img.setAttribute("src", "image_files\\blender3d\\" + this.image_src[this.state.index]);
         img.classList.add("slideshow-image");
@@ -188,6 +191,14 @@ const unturned_links= [
     "https://steamcommunity.com/sharedfiles/filedetails/?id=650720137"
 ];
 
+const today_img = ["today_rack_1.png", "today_rack_2.png", "today_receiver.png", "today_magazine.png", "today_rifle.png"];
+const today_text = [
+    "CAD drawing of the squat rack, with connecting plugs. Orthographic view",
+    "Simple render of final design, including 110kg of weights.",
+    "Stripped lower receiver model.",
+    "Magazine model, includes realistic follower and bottom plate.",
+    "Dissassembled fictitious rifle. Includes realistic components."
+];
 
 // TAB SYSTEM
 /* 
@@ -378,4 +389,7 @@ window.onload = () => {
     apply_corner_dots();
     const unturned_slideshow = new Slideshow("unturned", unturned_img, unturned_text, unturned_links);
     unturned_slideshow.render(document.querySelector("#blender-unturned-slideshow"));
+
+    const today_slideshow = new Slideshow("today", today_img, today_text);
+    today_slideshow.render(document.querySelector("#blender-today-slideshow"));
 }
