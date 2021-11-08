@@ -285,7 +285,11 @@ function close_tab(tab_id) {
         return close_tab(tab_id);
     }
 
-    if (TI.is_in_focus(tab_id)) TI.un_focus();
+    let was_in_focus = false;
+    if (TI.is_in_focus(tab_id)) {
+        TI.un_focus();
+        was_in_focus = true;
+    }
 
     const current_index = TI.active_tabs.indexOf(tab_id);
 
@@ -304,11 +308,13 @@ function close_tab(tab_id) {
     }
 
     // Focus on left tab until there are no more tab
-    if (current_index > 0) {
-        focus_tab(TI.active_tabs[current_index - 1]);
-    } else if (current_index == 0) {
-        TI.active_tabs.length ? focus_tab(TI.active_tabs[0]) : document.getElementById("welcome-inner").style.display = "flex";
-        focus_tab(TI.active_tabs[0]);
+    if (was_in_focus) {
+        if (current_index > 0) {
+            focus_tab(TI.active_tabs[current_index - 1]);
+        } else if (current_index == 0) {
+            TI.active_tabs.length ? focus_tab(TI.active_tabs[0]) : document.getElementById("welcome-inner").style.display = "flex";
+            focus_tab(TI.active_tabs[0]);
+        }
     }
 }
 
