@@ -5,8 +5,17 @@
         <link rel="stylesheet" type="text/css" href="stylesheets\general.css">
         <link rel="stylesheet" type="text/css" href="stylesheets\explorer.css">
         <link rel="stylesheet" type="text/css" href="stylesheets\nav_welcome.css">
-        <link rel="stylesheet" type="text/css" href="stylesheets\tabs.css">
+
+        <link rel="stylesheet" type="text/css" href="stylesheets/tabs/tabs_general.css">
+        <link rel="stylesheet" type="text/css" href="stylesheets/tabs/whatIuse.css">
+        <link rel="stylesheet" type="text/css" href="stylesheets/tabs/other_contact.css">
+        <link rel="stylesheet" type="text/css" href="stylesheets/tabs/freeCodeCamp.css">
+        <link rel="stylesheet" type="text/css" href="stylesheets/tabs/cpp.css">
+        <link rel="stylesheet" type="text/css" href="stylesheets/tabs/blender3d.css">
+
         <link rel="icon" type="image/svg" href="image_files/mb_logo.svg">
+
+
         <meta name="viewport" content="width = device-width, initial-scale=1">
     </head>
     <body>
@@ -67,17 +76,17 @@
             &gt;
         </div>
         <main id="welcome-section">
-            
             <nav id="navbar">
-                <a class="nav-link" id="whatIUse.mb-link">
-                    whatIUse.mb<span class="close-btn">&#x2715;</span>
-                </a>
-                <a class="nav-link" id="other.mb-link" onmouse>other.mb<span class="close-btn">&#x2715;</span></a>
-                <a class="nav-link" id="freeCodeCamp.mb-link">freeCodeCamp.mb<span class="close-btn">&#x2715;</span></a>
-                <a class="nav-link" id="cplusplus.mb-link">cplusplus.mb<span class="close-btn">&#x2715;</span></a>
-                <a class="nav-link" id="blender3d.mb-link">blender3d.mb<span class="close-btn">&#x2715;</span></a>
-                <a class="nav-link" id="contact.mb-link">contact.mb<span class="close-btn">&#x2715;</span></a>
-                <a href="#welcome-inner" id="dud-2" style="display: none;"></a><!-- for freeCodeCamp test-->
+                    <div id="nav-tab-bar"></div>
+                    <a class="nav-link" id="whatIUse.mb-link">
+                        whatIUse.mb<span class="close-btn">&#x2715;</span>
+                    </a>
+                    <a class="nav-link" id="other.mb-link" onmouse>other.mb<span class="close-btn">&#x2715;</span></a>
+                    <a class="nav-link" id="freeCodeCamp.mb-link">freeCodeCamp.mb<span class="close-btn">&#x2715;</span></a>
+                    <a class="nav-link" id="cplusplus.mb-link">cplusplus.mb<span class="close-btn">&#x2715;</span></a>
+                    <a class="nav-link" id="blender3d.mb-link">blender3d.mb<span class="close-btn">&#x2715;</span></a>
+                    <a class="nav-link" id="contact.mb-link">contact.mb<span class="close-btn">&#x2715;</span></a>
+                    <a href="#welcome-inner" id="dud-2" style="display: none;"></a><!-- for freeCodeCamp test-->
             </nav>
 
             <!-- placeholder welcome page / background -->
@@ -90,7 +99,11 @@
             </div>
 
             <!-- vv main content pages vv -->
-            <section class="tab" id="whatIUse.mb">tab 1</section>
+            <section class="tab" id="whatIUse.mb">
+                <div id="whatIUse-inner">
+                    <h1></h1>
+                </div>
+            </section>
 
             <section class="tab" id="other.mb">
                 <div id="other-inner">
@@ -116,17 +129,35 @@
             </section>
 
             <section class="tab" id="freeCodeCamp.mb">
-                <div id="freecodecamp-inner">
-                    <h1><span class="hide-cue">My </span>freeCodeCamp<span class="hide-cue"> projects</span></h1>
-                    <p>I first started learning programming at this website, and greatly appreciate their education. I have earned the certifications
-                        <a href="https://www.freecodecamp.org/certification/marcus-rb/responsive-web-design" style="display: inline-block;" target="_blank">Responsive Web Design</a> and 
-                        <a href="https://www.freecodecamp.org/certification/marcus-rb/javascript-algorithms-and-data-structures" style="display: inline-block;" target="_blank">JavaScript Algorithms and Data Structures</a></p>
-                    <p>
-                        Recently I remade all the websites required for the former certification except for the portfolio page, which I instead made just how I wanted. Of course I have them listed here so you can view them. I'd encourage noticing
-                        the progression between each site.
-                    </p>
-                    <div id="freecodecamp-projects">
-                        
+                <div class="tab-inner" id="fcc-inner">
+                    <h1><span class="hide-cue">My </span><a href="https://www.freecodecamp.org/" target="_blank">freeCodeCamp</a><span class="hide-cue"> projects</span></h1>
+                    <p class="fcc-text">The website that introduced me to and taught me the basics of HTML, CSS, and JS</p>
+                    <div id="fcc-certifications">
+                        <h2 class="fcc-h2">Certifications:</h2>
+                        <a class="fcc-cert" id="fcc-web" href="https://www.freecodecamp.org/certification/marcus-rb/responsive-web-design" target="_blank">
+                            <img class="fcc-cert-logo" src="image_files/fcc/computer_logo.svg"><p>Responsive Web Design</p>
+                        </a>
+                        <a class="fcc-cert" id="fcc-js" href="https://www.freecodecamp.org/certification/marcus-rb/javascript-algorithms-and-data-structures" target="_blank">
+                            <img class="fcc-cert-logo" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg"><p>JavaScript Algorithms and Data Structures</p>
+                        </a>
+                    </div>
+                    <div id="fcc-sites">
+                        <h2 class="fcc-h2">Websites:</h2>
+                        <div id="fcc-sites-inner">
+                            
+                            <a class="fcc-website" id="jfk" target="_blank" href="https://marcusbenrud.com/tribute_page">
+                                <p id="jfk-text">JFK Tribute Page</p><img class="fcc-site-img" src="image_files/fcc/jfk.PNG">
+                            </a>
+                            <a class="fcc-website" id="survey" target="_blank" href="https://marcusbenrud.com/survey_page/">
+                                <p id="survey-text">Survey page</p><img class="fcc-site-img" src="image_files/fcc/survey.PNG">
+                            </a>
+                            <a class="fcc-website" id="johns" target="_blank" href="https://marcusbenrud.com/product_landing_page">
+                                <p id="johns-text">Product Landing Page</p><img class="fcc-site-img" src="image_files/fcc/johns.PNG">
+                            </a>
+                            <a class="fcc-website" id="cpp" target="_blank" href="https://marcusbenrud.com/technical_documentation_page">
+                                <p id="cpp-text">C++ <span class="fcc-reveal">Doc.</span><span class="fcc-hide">Documentation page</span></p><img class="fcc-site-img" src="image_files/fcc/cpp_doc.PNG">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </section>
