@@ -1,0 +1,197 @@
+/* FREECODECAMP projects */
+#freeCodeCamp\.mb {
+    --color-bright: #1b1b32;
+    --color-dark: #0a0a23;
+    
+    background-color: var(--color-bright)
+;}
+
+#fcc-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* title */
+#fcc-inner h1 {
+    font-size: 300%;
+    font-weight: 200;
+    font-family: monospace;
+}
+
+#fcc-inner h1 a {
+    text-decoration: none;
+}
+
+#fcc-inner h1 a:hover {
+    background-color: rgba(256,256,256, 0.5);
+}
+
+@media (max-width: 1050px) {
+    #fcc-inner {
+        font-size: 80%;
+    }
+}
+
+@media (max-width: 635px) {
+    .hide-cue {
+        display: none;
+    }
+    .fcc-text {
+        max-width: 90%;
+    }
+}
+
+/* certification links */
+#fcc-certifications {
+    margin: 1em;
+    margin-top: 2em;
+
+    max-width: 1000px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas: "header header" "web js";
+    grid-gap: 1em;
+}
+
+.fcc-h2 {
+    font-family: monospace;
+    font-weight: 600;
+    
+    text-align: center;
+}
+#fcc-certifications h2 {
+    grid-area: header;
+}
+
+#fcc-web {
+    grid-area: web;
+}
+
+#fcc-js {
+    grid-area: js
+}
+
+.fcc-cert {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding: 0.5em;
+    background-color: var(--color-dark);
+
+    text-decoration: none;
+    transition: 0.15s;
+}
+.fcc-cert:hover {
+    background-color: #101038;
+}
+
+.fcc-cert p {
+    padding-left: 0.5em;
+}
+
+.fcc-cert-logo {
+    height: 3em;
+    width: 3em;
+}
+
+@media (max-width: 650px) {
+    #fcc-certifications {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, auto);
+        grid-template-areas: "header" "web" "js";
+    }
+}
+
+/* webpage links */
+#fcc-sites {
+    width: 100%;
+
+}
+
+#fcc-sites-inner {
+    margin-top: .5em;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap:wrap;
+}
+
+.fcc-website {
+    position: relative;
+    text-decoration: none;
+    aspect-ratio: 16 / 9;
+
+    min-width: 490px;
+    width: 50%;
+    max-width: 700px;
+
+    flex-shrink: 0;
+
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 740px) {
+    .fcc-website {
+        font-size: 80%;
+    }
+}
+
+@media (max-width: 1280px) {
+    .fcc-website {
+        margin-top: 1em;
+        min-width: 90%;
+        aspect-ratio: 23 / 10;
+        border: 1px solid var(--color-dark);
+    }
+    #fcc-sites {
+        margin-bottom: 1em;
+    }
+}
+
+.fcc-website p {
+    background-color: black;
+    z-index: 2;
+    font-size: 170%;
+    padding: 0.3em;
+}
+
+.fcc-hidden-text {
+    display: none;
+}
+
+.fcc-site-img {
+    z-index: 0;
+    filter: blur(16px);
+    position: absolute;
+    left: 0;
+    top: 0;
+    max-height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: 0.075s;
+}
+
+.fcc-site-img:hover {
+    filter: blur(1px);
+    transform: scale(1.03);
+}
+
+.fcc-reveal {
+    display: none;
+}
+
+@media (max-width: 340px) {
+    .fcc-reveal {
+        display: unset;
+    }
+    .fcc-hide {
+        display: none;
+    }
+}
