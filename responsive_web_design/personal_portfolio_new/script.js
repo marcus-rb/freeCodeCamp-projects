@@ -57,6 +57,16 @@ function reveal_json() {
     document.getElementById("other-json").style.display = "block";
 }
 
+// \projects fcc related
+function toggle_text_visibility(site_element, event) {
+    const elem = document.getElementById(site_element.id + "-text");
+    if (event.type == "mouseleave") {
+        elem.classList.remove("fcc-hidden-text");
+    } else {
+        elem.classList.add("fcc-hidden-text");
+    }
+}
+
 // \projects\blender3d.mb page related
 function apply_corner_dots() {
     const elements = document.getElementsByClassName("blender-content");
@@ -382,6 +392,17 @@ window.onload = () => {
         })
         tab_projectlink.addEventListener("dblclick", () => {
              select_tab_action(tab_projectlink.textContent, false);
+        })
+    }
+
+    // hover functionality for fcc web links
+    for (const fcc_page of document.getElementsByClassName("fcc-website")) {
+        fcc_page.addEventListener("mouseenter", (e)=>toggle_text_visibility(fcc_page, e));
+        fcc_page.addEventListener("mouseleave", (e)=>toggle_text_visibility(fcc_page, e));
+        // adding this for proper function when clicking any of the links on mobile
+        fcc_page.addEventListener("click", ()=>{
+            const e = new Event("mouseleave");
+            fcc_page.dispatchEvent(e);
         })
     }
 
