@@ -15,7 +15,7 @@
 
         <link rel="icon" type="image/svg" href="image_files/mb_logo.svg">
 
-
+        <meta charset="utf-8">
         <meta name="viewport" content="width = device-width, initial-scale=1">
     </head>
     <body>
@@ -209,7 +209,76 @@
                 </div>
             </section>
 
-            <section class="tab" id="cplusplus.mb">tab 4</section>
+            <section class="tab" id="cplusplus.mb">
+                <div id="cpp-inner">
+                    <div id="cpp-background"></div>
+                    <div id="cpp-intro">
+                        <img id="cpp-logo" src="image_files/cpp/cpp_logo.svg">
+                        <div id="cpp-links">
+                            <a class="cpp-link" id="cpp-link-origins" onclick="scroll_to_cpp('cpp-origins')">origins</a>
+                            <a class="cpp-link" id="cpp-link-largeints" onclick="scroll_to_cpp('cpp-largeints')">LargeInts</a>
+                            <a class="cpp-link" id="cpp-link-data-structures" onclick="scroll_to_cpp('cpp-datastructures')">Data Structures</a>
+                        </div>
+                    </div>
+                    <div id="cpp-main-content">
+                        <div id="cpp-origins" class="cpp-content">
+                            <div class="cpp-content-intro">
+                                <h2>&lt;origins&gt;</h2>
+                                <p>#ifndef MB_ORIGINS</p>
+                                <p>#define MB_ORIGINS</p>
+                            </div>
+                            <div class="cpp-content-inner">
+                                <p>
+                                    C++ first caught my attention when I tried implementing the SHA-256 hash algorithm in JavaScript, noticing the lack of 
+                                    64-bit integrals, and that most of the tutorials I could find used C++. 
+                                    I ended up <a target="_blank" href="https://github.com/marcus-rb/bitint">making my own integrals</a> in JS instead
+                                    but the language would stay with me as I was fascinated by the potential for high performance and optimization.
+                                </p>
+                            </div>
+                            <div class="cpp-content-intro">
+                                <p>#endif</p>
+                            </div>
+                        </div>
+                        <div id="cpp-largeints" class="cpp-content">
+                            <div class="cpp-content-intro">
+                                <h2>"LargeInts.h"</h2>
+                                <p>#pragma once</p>
+                            </div>
+                            <div class="cpp-content-inner">
+                                <p>
+                                    Done as a learning exercise to better my understanding of the underlying memory structure and function of data. Not only
+                                    would this furhter my understanding of C++, but also how much is going on under the hood. You start reconsidering using the 'if' keyword. 
+                                    Here's some jargon from a bitshift operation I made for <a target="_blank" href="https://github.com/marcus-rb/LargeInts">this library</a>:
+                                </p>
+                                <div class="cpp-code-snippet">
+                                    ((~(LIPP_UTIL::MAX_OF_T&lt;T&gt; >> amount)) & m_InternalState[i - 1]) >> (BITSIZE(T) - amount)
+                                </div>
+                                <p>Spooky, right?</p>
+                            </div>
+                        </div>
+                        <div id="cpp-datastructures" class="cpp-content">
+                            <div class="cpp-content-intro">
+                                <h2>data_structures.cpp</h2>
+                                <p>using namespace <span style="color: white">confused;</span></p>
+                            </div>
+                            <div class="cpp-content-inner">
+                                <p>
+                                    Growing more confident I decided I wanted to give building typical data structures a try. As usual things are more complex under the hood
+                                    and through deep diving in the STL I was able to implement custom iterators, memory management for custom allocators, and parts of the type_traits
+                                    library. How do you ask the OS for memory the hard way?
+                                </p>
+                                <div class="cpp-code-snippet">
+                                    template &lt;typename T&gt;<br>
+                                    T* allocate(size_t amount = 1) {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;return reinterpret_cast&lt;T*&gt;(::operator new(sizeof(T) * amount));<br>
+                                    }
+                                </div>
+                                <a target="_blank" href="https://github.com/marcus-rb/Cxx-Data-Structures"><p>github link here</p></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <section class="tab" id="blender3d.mb">
                 <div id="blender-intro">
