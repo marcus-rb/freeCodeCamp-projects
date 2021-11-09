@@ -1,0 +1,71 @@
+#whatIUse\.mb {
+    background-image: url("..\\..\\image_files\\tools\\background.jpg");
+    background-size: cover;
+    background-origin: center;
+}
+
+#whatIUse-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    overflow-y: auto;
+}
+
+#whatiuse-title {
+    margin: 2em;
+    text-align: center;
+    justify-self: flex-start;
+}
+
+#tools-list {
+    width: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.tool {
+    background: black;
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    width:30%;
+    min-width: 340px;
+
+    border: 1px solid white;
+    padding: .3em;
+    margin: .5em;
+}
+
+.tool-text {
+    display: inline-flex;
+    flex-direction: column;
+    margin-left: .5em;
+}
+
+.tool p {
+    grid-area: text;
+    margin: 0;
+    padding: 0;
+}
+
+.tool h2 {
+    grid-area: head;
+    margin: 0;
+    padding: 0;
+}
+
+.tool-icon {
+    grid-area: img;
+    height: 5em;
+    width: 5em;
+}
+
+#caffeine img {
+    filter: invert(100%);
+}
