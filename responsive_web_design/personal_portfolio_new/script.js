@@ -67,6 +67,15 @@ function toggle_text_visibility(site_element, event) {
     }
 }
 
+// cpp scrollto 
+function scroll_to_cpp(elem_id) {
+    const elem = document.getElementById(elem_id);
+    const top_pos = elem.offsetTop;
+
+    document.getElementById("cplusplus.mb").scrollTop = top_pos;
+
+}
+
 // \projects\blender3d.mb page related
 function apply_corner_dots() {
     const elements = document.getElementsByClassName("blender-content");
