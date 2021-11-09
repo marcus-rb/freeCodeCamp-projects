@@ -1,1 +1,122 @@
 /* C++ PROJECTS */
+#cpp-inner {
+    width: 100%;
+    height: 100%;
+
+}
+
+#cpp-background {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: -1;
+    background: url("..\\..\\image_files\\cpp\\cpp_background.svg");
+    background-size: cover;
+}
+
+/* cpp welcome section*/
+#cpp-intro {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    min-height: 580px;
+}
+
+#cpp-logo {
+    max-width: 40%;
+    min-width: 250px;
+}
+
+#cpp-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.cpp-link {
+    padding: .5em;
+    border-right: 2px solid darkblue;
+    margin: .3em;
+    text-decoration: none;
+    transition: 0.15s;
+    cursor: pointer;
+}
+
+.cpp-link:hover {
+    background-color: rgba(255,255,255,0.3);
+}
+
+@media (max-width: 560px) {
+    #cpp-intro {
+        flex-direction: column-reverse;
+    }
+    #cpp-links {
+        align-items: center;
+    }
+    .cpp-link {
+        width: 200px;
+        border: none;
+        border-left: 2px solid darkblue;
+    }
+}
+
+/* content */
+#cpp-main-content {
+    display: flex;
+    flex-direction: column;
+}
+
+#cpp-origins {
+    padding-top: 1em;
+    align-self: flex-start;
+}
+
+#cpp-largeints {
+    align-self: flex-end;
+}
+
+#cpp-datastructures {
+    align-self: center;
+}
+
+.cpp-content p {
+    margin: 0;
+}
+
+.cpp-content {
+    width: calc(100% - 4em);
+    max-width: 1000px;
+    margin: 2em;
+}
+
+.cpp-content-intro > p{
+    padding: .3em;
+    background-color: var(--color-1);
+    font-family: monospace;
+    color: #c05dd4;
+}
+.cpp-content-intro > h2 {
+    color: lightgreen;
+    font-weight: lighter;
+    display: inline-block;
+    background-color: var(--color-1);
+}
+
+.cpp-content-inner {
+    padding: .3em;
+    background-color: #232323;
+    font-weight: lighter;
+    line-height: 130%;
+}
+
+.cpp-code-snippet {
+    font-family: monospace;
+    padding: .2em;
+    border-radius: .3em;
+    background-color: var(--color-1);
+    max-width: 100%;
+    overflow: auto;
+    white-space: nowrap;
+}
