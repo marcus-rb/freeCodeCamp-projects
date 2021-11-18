@@ -81,7 +81,7 @@ function apply_corner_dots() {
     const elements = document.getElementsByClassName("blender-content");
     const dot_array = ["bd-top bd-left", "bd-top bd-right", "bd-bottom bd-left", "bd-bottom bd-right"];
 
-    elements.forEach(elem => {
+    Array.from(elements).forEach(elem => {
         for (let i = 0; i < dot_array.length; i++) {
             const dot = document.createElement("div");
             dot.classList.add("blender-dot");
@@ -210,7 +210,7 @@ const unturned_links= [
     "https://steamcommunity.com/sharedfiles/filedetails/?id=650720137"
 ];
 
-const today_img = ["today_rack_1.png", "today_rack_2.png", "today_receiver.png", "today_magazine.png", "today_rifle.png"];
+const today_img = ["today_rack_1.jpg", "today_rack_2.jpg", "today_receiver.jpg", "today_magazine.jpg", "today_rifle.jpg"];
 const today_text = [
     "CAD drawing of the squat rack, with connecting plugs. Orthographic view",
     "Simple render of final design, including 110kg of weights.",
@@ -423,6 +423,7 @@ window.onload = () => {
 
     // apply corner dots on blender page'
     apply_corner_dots();
+
     const unturned_slideshow = new Slideshow("unturned", unturned_img, unturned_text, unturned_links);
     unturned_slideshow.render(document.querySelector("#blender-unturned-slideshow"));
 
